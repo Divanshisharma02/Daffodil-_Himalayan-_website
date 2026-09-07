@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daffodil Himalayan | Ultra Luxury Expeditions & Sanctuaries</title>
+  <meta name="description" content="Daffodil Himalayan is an ultra-premium luxury travel company registered with the Tourism Dept (Reg No: 11-2279/2024-DTO-SML). Discover Kashmir, Leh Ladakh, Kerala, Maldives, Kedarnath, and bespoke expeditions.">
+  
+  <!-- CSS Dependencies -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- TOP HEADER NOTICE BANNER -->
+  <div class="bg-dark text-white py-1 px-3" style="font-size: 0.78rem; border-bottom: 1px solid rgba(212,175,55,0.3);">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap px-4">
+      <div>
+        <span class="text-warning me-3"><i class="fas fa-certificate me-1"></i> Govt Reg: <strong>11-2279/2024-DTO-SML</strong></span>
+        <span class="d-none d-md-inline text-light"><i class="fas fa-shield-alt me-1 text-success"></i> Official Tourism Dept Registered Portal</span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="tel:+918219527240" class="text-light text-decoration-none"><i class="fas fa-phone-alt me-1 text-warning"></i> +91 8219527240</a>
+        <a href="mailto:daffodilhimalayan@gmail.com" class="text-light text-decoration-none d-none d-sm-inline"><i class="fas fa-envelope me-1 text-warning"></i> daffodilhimalayan@gmail.com</a>
+        <a href="https://www.instagram.com/daffodilhimalayan/" target="_blank" rel="noopener noreferrer" class="text-warning text-decoration-none" title="Follow on Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/people/Daffodil-Himalayan/61558630090989/?mibextid=JRoKGi" target="_blank" rel="noopener noreferrer" class="text-warning text-decoration-none" title="Follow on Facebook"><i class="fab fa-facebook"></i></a>
+        <button id="fullscreenToggleBtn" class="btn btn-outline-warning btn-sm py-0 px-2 ms-2" style="font-size: 0.75rem; border-radius: 20px;"><i class="fas fa-expand me-1"></i> 100% Screen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BAR (100% STABLE WITH ALL ITEMS) -->
+  <nav class="navbar navbar-expand-xl navbar-dark luxury-nav sticky-top py-2">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" title="Go to Home Page">
+        <img src="images/logo.jpeg" alt="Daffodil Himalayan Logo" class="brand-logo">
+        <div class="d-flex flex-column">
+          <div>DAFFODIL <span>HIMALAYAN</span></div>
+          <span class="reg-badge">Govt Reg: 11-2279/2024-DTO-SML</span>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="destinations.html"><i class="fas fa-map-marker-alt me-1"></i>Destinations</a></li>
+          <li class="nav-item"><a class="nav-link" href="packages.html"><i class="fas fa-suitcase me-1"></i>Tour Packages</a></li>
+          <li class="nav-item"><a class="nav-link" href="temple-tours.html"><i class="fas fa-place-of-worship me-1"></i>Temple Tours</a></li>
+          <li class="nav-item"><a class="nav-link" href="heritage.html"><i class="fas fa-monument me-1"></i>Heritage</a></li>
+          <li class="nav-item"><a class="nav-link" href="adventure.html"><i class="fas fa-hiking me-1"></i>Adventure</a></li>
+          <li class="nav-item"><a class="nav-link" href="hotels.html"><i class="fas fa-hotel me-1"></i>Hotels</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i>About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+        </ul>
+        <div class="nav-action-wrapper" id="authNavContainer">
+          <select id="currencySelector" class="currency-selector" title="Select Currency">
+            <option value="INR">₹ INR</option>
+            <option value="USD">$ USD</option>
+          </select>
+          </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION WITH CRYSTAL-CLEAR HIMALAYAN BACKGROUND IMAGE -->
+  <section class="hero-wrapper" style="background: url('images/himalayan_hero.png') center center / cover no-repeat;">
+    <div class="hero-overlay"></div>
+    <div class="hero-content" data-aos="fade-up">
+      <span class="section-tag section-tag-pill"><i class="fas fa-mountain text-warning me-1"></i> Luxury Himalayan Expeditions</span>
+      <h1 class="hero-title font-serif">Explore Incredible India & Beyond</h1>
+      <p class="hero-sub">Discover unforgettable Himalayan journeys, sacred heritage, and pristine international sanctuaries curated by Daffodil Himalayan.</p>
+
+      <!-- PILL SEARCH BAR -->
+      <form class="luxury-search-pill mt-4">
+        <div class="search-item">
+          <label class="search-label"><i class="fas fa-map-marker-alt text-success me-1"></i> Where To</label>
+          <input type="text" id="heroDestInput" class="search-input" placeholder="Kashmir, Leh, Kedarnath, Maldives...">
+        </div>
+        <div class="search-item">
+          <label class="search-label"><i class="fas fa-calendar-alt text-success me-1"></i> Travel Date</label>
+          <input type="date" id="heroDateInput" class="search-input">
+        </div>
+        <div class="search-item">
+          <label class="search-label"><i class="fas fa-user-friends text-success me-1"></i> Travellers</label>
+          <select id="heroTravellersInput" class="search-input">
+            <option value="1">1 Guest</option>
+            <option value="2" selected>2 Guests (Couple)</option>
+            <option value="4">4 Guests (Family)</option>
+            <option value="8">8+ Guests (Group)</option>
+          </select>
+        </div>
+        <button type="button" id="heroBookNowBtn" class="btn btn-gold px-4 py-3 text-uppercase fw-bold"><i class="fas fa-paper-plane me-1"></i> Book Now</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FEATURED DESTINATIONS SHOWCASE -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-tag">Curated Sanctuaries</span>
+        <h2 class="section-title">Iconic Destinations</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 0 auto;">From Kashmir and Leh Ladakh to Kedarnath Dham, Taj Mahal, and Maldives Overwater Villas.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Card 1: Kashmir -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="luxury-card">
+            <div class="card-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=800&q=80" alt="Kashmir">
+              <div class="card-badge-container">
+                <span class="badge-luxury">Himalayan</span>
+                <span class="badge-luxury">Best Seller</span>
+              </div>
+            </div>
+            <div class="card-body-content">
+              <div>
+                <h3 class="card-title font-serif">Royal Kashmir & Gulmarg Tour</h3>
+                <div class="card-meta">
+                  <span><i class="fas fa-map-marker-alt text-success"></i> J&K, India</span>
+                  <span><i class="fas fa-star text-warning"></i> 4.9 (312 reviews)</span>
+                </div>
+                <p class="small text-muted mb-3">Dal Lake houseboats, Mughal Gardens, and alpine gondola slopes of Gulmarg & Pahalgam.</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+                <div class="price-tag">₹19,999 <span>/ guest</span></div>
+                <a href="package-details.html?slug=royal-kashmir-luxury-expedition" class="btn btn-sm btn-gold">Explore Tour</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Kedarnath Temple -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="luxury-card">
+            <div class="card-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" alt="Kedarnath">
+              <div class="card-badge-container">
+                <span class="badge-luxury">Sacred Temple</span>
+                <span class="badge-luxury">Helicopter VIP</span>
+              </div>
+            </div>
+            <div class="card-body-content">
+              <div>
+                <h3 class="card-title font-serif">Sacred Char Dham Yatra</h3>
+                <div class="card-meta">
+                  <span><i class="fas fa-gopuram text-success"></i> Uttarakhand</span>
+                  <span><i class="fas fa-star text-warning"></i> 5.0 (98 reviews)</span>
+                </div>
+                <p class="small text-muted mb-3">Divine Himalayan spiritual Yatra with helicopter shuttle and priority temple darshan.</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+                <div class="price-tag">₹21,999 <span>/ guest</span></div>
+                <a href="package-details.html?slug=sacred-kedarnath-badrinath-pilgrimage" class="btn btn-sm btn-gold">Explore Tour</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Taj Mahal Heritage -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="luxury-card">
+            <div class="card-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Taj Mahal">
+              <div class="card-badge-container">
+                <span class="badge-luxury">UNESCO Heritage</span>
+              </div>
+            </div>
+            <div class="card-body-content">
+              <div>
+                <h3 class="card-title font-serif">Golden Triangle & Taj Mahal Heritage Tour</h3>
+                <div class="card-meta">
+                  <span><i class="fas fa-landmark text-success"></i> Agra & Delhi</span>
+                  <span><i class="fas fa-star text-warning"></i> 4.93 (180 reviews)</span>
+                </div>
+                <p class="small text-muted mb-3">Sunrise Taj Mahal guided tour, Qutub Minar, and Jaipur Amber Fort Maharajah Palace.</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+                <div class="price-tag">₹12,999 <span>/ guest</span></div>
+                <a href="package-details.html?slug=royal-golden-triangle-taj-mahal" class="btn btn-sm btn-gold">Explore Tour</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="packages.html" class="btn btn-forest px-5 py-3"><i class="fas fa-compass me-2"></i> View All Tour Packages</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAN-INDIA ADVENTURE SECTION -->
+  <section class="section-padding bg-beige-card">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+          <span class="section-tag">Pan-India Thrills</span>
+          <h2 class="section-title">Himalayan & Pan-India Adventure Sports</h2>
+          <p class="text-muted mb-4">Paragliding in Solang Valley, river rafting in Rishikesh, scuba diving in Andaman, and mountain trekking across Kashmir & Leh Ladakh.</p>
+          
+          <ul class="list-unstyled mb-4">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Certified Safety Gear & Expeditions Escorts</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Custom VIP Helicopters & Steamer Charters</li>
+          </ul>
+
+          <a href="adventure.html" class="btn btn-gold">Explore Adventure Packages</a>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="p-3 bg-white rounded-3 shadow-sm text-center border">
+                <i class="fas fa-parachute-box fa-3x text-success mb-2"></i>
+                <h5 class="font-serif m-0">Paragliding</h5>
+                <small class="text-muted">Solang & Bir Billing</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="p-3 bg-white rounded-3 shadow-sm text-center border">
+                <i class="fas fa-water fa-3x text-success mb-2"></i>
+                <h5 class="font-serif m-0">River Rafting</h5>
+                <small class="text-muted">Rishikesh & Zanskar</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="p-3 bg-white rounded-3 shadow-sm text-center border">
+                <i class="fas fa-mountain fa-3x text-success mb-2"></i>
+                <h5 class="font-serif m-0">High Trekking</h5>
+                <small class="text-muted">Hampta & Ladakh Trail</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="p-3 bg-white rounded-3 shadow-sm text-center border">
+                <i class="fas fa-swimmer fa-3x text-success mb-2"></i>
+                <h5 class="font-serif m-0">Scuba Diving</h5>
+                <small class="text-muted">Andaman & Lakshadweep</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUXURY FOOTER -->
+  <footer class="luxury-footer">
+    <div class="container-fluid px-5">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h3 class="font-serif text-white mb-3">DAFFODIL HIMALAYAN</h3>
+          <p class="small text-light mb-3">Ultra-premium luxury travel portal registered with the Tourism Department. Permanent Registration Number: <strong>11-2279/2024-DTO-SML</strong>.</p>
+          <div class="d-flex gap-3 text-warning">
+            <a href="https://wa.me/918219527240" target="_blank" rel="noopener noreferrer" class="text-warning" title="WhatsApp"><i class="fab fa-whatsapp fa-lg"></i></a>
+            <a href="https://www.instagram.com/daffodilhimalayan/" target="_blank" rel="noopener noreferrer" class="text-warning" title="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="https://www.facebook.com/people/Daffodil-Himalayan/61558630090989/?mibextid=JRoKGi" target="_blank" rel="noopener noreferrer" class="text-warning" title="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="text-warning" title="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="footer-title">Destinations</h5>
+          <ul class="footer-links">
+            <li><a href="destinations.html">Himachal Pradesh</a></li>
+            <li><a href="destinations.html">Kashmir</a></li>
+            <li><a href="destinations.html">Leh Ladakh</a></li>
+            <li><a href="destinations.html">Kedarnath Dham</a></li>
+            <li><a href="destinations.html">Rajasthan Forts</a></li>
+            <li><a href="destinations.html">Maldives Resorts</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <h5 class="footer-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="packages.html"><i class="fas fa-suitcase me-1"></i>Tour Packages</a></li>
+            <li><a href="temple-tours.html">Temple Yatra</a></li>
+            <li><a href="heritage.html">Heritage Monuments</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle me-1"></i>About Us</a></li>
+            <li><a href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <h5 class="footer-title">Headquarters</h5>
+          <p class="small mb-1"><i class="fas fa-map-marker-alt text-warning me-2"></i> Parkash Kunj, Near Om Niwas , Gahan, Sanjauli, Distt. Shimla (H.P.)</p>
+          <p class="small mb-1"><i class="fas fa-phone-alt text-warning me-2"></i> +91 8219527240</p>
+          <p class="small mb-3"><i class="fas fa-envelope text-warning me-2"></i> daffodilhimalayan@gmail.com</p>
+          <div class="p-2 bg-dark rounded border border-warning d-inline-block">
+            <span class="small text-warning"><i class="fas fa-shield-alt me-1"></i> Govt Reg: 11-2279/2024-DTO-SML</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom text-center">
+        <p class="m-0">&copy; 2026 Daffodil Himalayan. All Rights Reserved. Govt Tourism Dept Reg No: 11-2279/2024-DTO-SML.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOOK NOW MULTI-STEP ENQUIRY MODAL -->
+  <div class="modal fade" id="bookNowModal" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-lg text-dark">
+        
+        <div class="modal-header bg-dark text-white border-bottom border-warning">
+          <div>
+            <h4 class="modal-title font-serif text-warning mb-0" id="bookNowModalLabel"><i class="fas fa-compass me-2"></i> Travel Enquiry & Booking</h4>
+            <small class="text-light" id="modalStepSubtitle">Step 1 of 2: Personal & Contact Information</small>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="px-4 pt-3">
+          <div class="progress" style="height: 6px;">
+            <div id="modalProgressBar" class="progress-bar bg-warning" role="progressbar" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <div class="modal-body p-4">
+          <form id="multiStepEnquiryForm" novalidate>
+            
+            <!-- STEP 1 CONTAINER -->
+            <div id="enquiryStep1">
+              <h5 class="font-serif mb-3 text-success"><i class="fas fa-user-circle me-2"></i> Step 1: Your Personal Information</h5>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Full Name <span class="text-danger">*</span></label>
+                  <input type="text" id="modalName" class="form-control" placeholder="Your Full Name" required>
+                  <div id="modalNameErr" class="text-danger small mt-1" style="display:none;">Full name is compulsory.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Email Address <span class="text-danger">*</span></label>
+                  <input type="email" id="modalEmail" class="form-control" placeholder="example@domain.com" required>
+                  <div id="modalEmailErr" class="text-danger small mt-1" style="display:none;">Valid email is compulsory.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Phone Number <span class="text-danger">*</span></label>
+                  <input type="tel" id="modalPhone" class="form-control" placeholder="10-digit phone number" required>
+                  <div id="modalPhoneErr" class="text-danger small mt-1" style="display:none;">Phone number is compulsory.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Number of Travelers <span class="text-danger">*</span></label>
+                  <input type="number" id="modalTravelers" class="form-control" min="1" value="2" placeholder="Count (e.g. 2)" required>
+                  <div id="modalTravelersErr" class="text-danger small mt-1" style="display:none;">Number of travelers is compulsory.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-bold">Enter Your Message <span class="badge bg-secondary ms-1">Optional</span></label>
+                  <textarea id="modalMessage" class="form-control" rows="3" placeholder="Enter your msg... (Optional)"></textarea>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end mt-4">
+                <button type="button" id="modalNextBtn" class="btn btn-gold px-4 py-2 fw-bold text-uppercase">
+                  Next <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2 CONTAINER -->
+            <div id="enquiryStep2" style="display: none;">
+              <h5 class="font-serif mb-3 text-success"><i class="fas fa-route me-2"></i> Step 2: Destination & Itinerary Preferences</h5>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">From Where to Where <span class="text-danger">*</span></label>
+                  <input type="text" id="modalDestination" class="form-control" placeholder="e.g. Delhi to Kashmir / Manali" required>
+                  <div id="modalDestErr" class="text-danger small mt-1" style="display:none;">Travel route is compulsory.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Travel Date</label>
+                  <input type="date" id="modalDate" class="form-control">
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-bold">Description / What you want to cover or skip</label>
+                  <textarea id="modalDescription" class="form-control" rows="4" placeholder="Enter details on what destinations/attractions you want to cover or skip..."></textarea>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button type="button" id="modalBackBtn" class="btn btn-outline-dark px-4 py-2 fw-bold text-uppercase">
+                  <i class="fas fa-arrow-left me-2"></i> Back
+                </button>
+                <button type="submit" id="modalSubmitBtn" class="btn btn-gold px-4 py-2 fw-bold text-uppercase">
+                  <i class="fas fa-paper-plane me-2"></i> Submit Enquiry
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const bookNowBtn = document.getElementById('heroBookNowBtn');
+      const bookNowModalEl = document.getElementById('bookNowModal');
+      const bsModal = bookNowModalEl ? new bootstrap.Modal(bookNowModalEl) : null;
+
+      bookNowBtn?.addEventListener('click', () => {
+        const destVal = document.getElementById('heroDestInput')?.value || '';
+        const dateVal = document.getElementById('heroDateInput')?.value || '';
+        const travVal = document.getElementById('heroTravellersInput')?.value || '2';
+
+        if (destVal) document.getElementById('modalDestination').value = destVal;
+        if (dateVal) document.getElementById('modalDate').value = dateVal;
+        if (travVal) document.getElementById('modalTravelers').value = travVal;
+
+        showStep(1);
+        bsModal?.show();
+      });
+
+      const nextBtn = document.getElementById('modalNextBtn');
+      const backBtn = document.getElementById('modalBackBtn');
+
+      function showStep(step) {
+        if (step === 1) {
+          document.getElementById('enquiryStep1').style.display = 'block';
+          document.getElementById('enquiryStep2').style.display = 'none';
+          document.getElementById('modalProgressBar').style.width = '50%';
+          document.getElementById('modalStepSubtitle').textContent = 'Step 1 of 2: Personal & Contact Information';
+        } else {
+          document.getElementById('enquiryStep1').style.display = 'none';
+          document.getElementById('enquiryStep2').style.display = 'block';
+          document.getElementById('modalProgressBar').style.width = '100%';
+          document.getElementById('modalStepSubtitle').textContent = 'Step 2 of 2: Destination & Itinerary Preferences';
+        }
+      }
+
+      nextBtn?.addEventListener('click', () => {
+        const name = document.getElementById('modalName').value.trim();
+        const email = document.getElementById('modalEmail').value.trim();
+        const phone = document.getElementById('modalPhone').value.trim();
+        const travelers = document.getElementById('modalTravelers').value.trim();
+
+        let valid = true;
+
+        if (!name) { document.getElementById('modalNameErr').style.display = 'block'; valid = false; }
+        else { document.getElementById('modalNameErr').style.display = 'none'; }
+
+        if (!email || !email.includes('@')) { document.getElementById('modalEmailErr').style.display = 'block'; valid = false; }
+        else { document.getElementById('modalEmailErr').style.display = 'none'; }
+
+        if (!phone) { document.getElementById('modalPhoneErr').style.display = 'block'; valid = false; }
+        else { document.getElementById('modalPhoneErr').style.display = 'none'; }
+
+        if (!travelers || Number(travelers) < 1) { document.getElementById('modalTravelersErr').style.display = 'block'; valid = false; }
+        else { document.getElementById('modalTravelersErr').style.display = 'none'; }
+
+        if (valid) {
+          showStep(2);
+        }
+      });
+
+      backBtn?.addEventListener('click', () => {
+        showStep(1);
+      });
+
+      document.getElementById('multiStepEnquiryForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('modalName').value.trim();
+        const email = document.getElementById('modalEmail').value.trim();
+        const phone = document.getElementById('modalPhone').value.trim();
+        const travelers = document.getElementById('modalTravelers').value.trim();
+        const msg = document.getElementById('modalMessage').value.trim();
+
+        const destination = document.getElementById('modalDestination').value.trim();
+        const travelDate = document.getElementById('modalDate').value;
+        const description = document.getElementById('modalDescription').value.trim();
+
+        if (!destination) {
+          document.getElementById('modalDestErr').style.display = 'block';
+          return;
+        } else {
+          document.getElementById('modalDestErr').style.display = 'none';
+        }
+
+        // Log to backend Excel sheet
+        try {
+          await fetch('/api/inquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              email: email || 'N/A',
+              phone: phone || 'N/A',
+              subject: `Booking Enquiry: ${destination}`,
+              message: `Travelers: ${travelers}\nTravel Date: ${travelDate || 'Not specified'}\nPreferences: ${description || 'None'}\nAdditional Message: ${msg || 'None'}`,
+              sourcePage: 'Homepage Modal'
+            })
+          });
+        } catch (err) {
+          console.warn('Backend inquiry logging failed:', err.message);
+        }
+
+        const messageText = `Hello Daffodil Himalayan,\n\nI have a Travel Booking Enquiry:\n- Name: ${name}\n- Email: ${email}\n- Phone: ${phone}\n- No. of Travelers: ${travelers}\n- Message: ${msg || 'None'}\n- Destination (From-To): ${destination}\n- Travel Date: ${travelDate || 'Not specified'}\n- Cover/Skip Preferences: ${description || 'None'}`;
+
+        const waUrl = `https://wa.me/918219527240?text=${encodeURIComponent(messageText)}`;
+        window.open(waUrl, '_blank');
+
+        alert(`Thank you, ${name}! Your travel enquiry has been successfully submitted.\n\nA confirmation email has been dispatched to ${email || 'your email address'}, and our travel team will reach out to you shortly.`);
+        document.getElementById('multiStepEnquiryForm').reset();
+        showStep(1);
+        bsModal?.hide();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "name": "daffodil-himalayan",
+  "version": "1.0.0",
+  "description": "Ultra-Premium Travel & Tourism Platform - Daffodil Himalayan (Reg No: 11-2279/2024-DTO-SML)",
+  "main": "backend/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "seed": "node backend/scripts/seed.js"
+  },
+  "keywords": [
+    "travel",
+    "tourism",
+    "himalaya",
+    "india-tours",
+    "booking-engine",
+    "luxury-travel"
+  ],
+  "author": "Daffodil Himalayan Tech Team",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.1",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.13",
+    "pdfkit": "^0.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.2"
+  }
+}

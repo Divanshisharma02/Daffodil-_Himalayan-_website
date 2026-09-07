@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Your Reservation | Daffodil Himalayan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="bg-light">
+
+  <!-- TOP HEADER NOTICE BANNER -->
+  <div class="bg-dark text-white py-1 px-3" style="font-size: 0.78rem; border-bottom: 1px solid rgba(212,175,55,0.3);">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap px-4">
+      <div>
+        <span class="text-warning me-3"><i class="fas fa-certificate me-1"></i> Govt Reg: <strong>11-2279/2024-DTO-SML</strong></span>
+        <span class="d-none d-md-inline text-light"><i class="fas fa-shield-alt me-1 text-success"></i> Official Tourism Dept Registered Portal</span>
+      </div>
+      <div>
+        <a href="tel:+918219527240" class="text-light me-3 text-decoration-none"><i class="fas fa-phone-alt me-1 text-warning"></i> +91 8219527240</a>
+        <a href="mailto:daffodilhimalayan@gmail.com" class="text-light text-decoration-none d-none d-sm-inline"><i class="fas fa-envelope me-1 text-warning"></i> daffodilhimalayan@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERMANENT STABLE NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark luxury-nav sticky-top py-2">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" title="Go to Home Page">
+        <img src="images/logo.jpeg" alt="Daffodil Himalayan Logo" class="brand-logo">
+        <div class="d-flex flex-column">
+          <div>DAFFODIL <span>HIMALAYAN</span></div>
+          <span class="reg-badge">Govt Reg: 11-2279/2024-DTO-SML</span>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="destinations.html"><i class="fas fa-map-marker-alt me-1"></i>Destinations</a></li>
+          <li class="nav-item"><a class="nav-link" href="packages.html"><i class="fas fa-suitcase me-1"></i>Tour Packages</a></li>
+          <li class="nav-item"><a class="nav-link" href="temple-tours.html"><i class="fas fa-place-of-worship me-1"></i>Temple Tours</a></li>
+          <li class="nav-item"><a class="nav-link" href="heritage.html"><i class="fas fa-monument me-1"></i>Heritage</a></li>
+          <li class="nav-item"><a class="nav-link" href="adventure.html"><i class="fas fa-hiking me-1"></i>Adventure</a></li>
+          <li class="nav-item"><a class="nav-link" href="hotels.html"><i class="fas fa-hotel me-1"></i>Hotels</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i>About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i>Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+        </ul>
+        <div class="nav-action-wrapper" id="authNavContainer">
+          <select id="currencySelector" class="currency-selector"><option value="INR">₹ INR</option><option value="USD">$ USD</option></select>
+          </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BOOKING FUNNEL -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="row g-4">
+        <!-- FORM LEFT -->
+        <div class="col-lg-8">
+          <form id="bookingForm" class="bg-white p-4 p-md-5 rounded-3 shadow-sm border border-warning">
+            <h3 class="font-serif mb-4 text-dark"><i class="fas fa-suitcase-rolling text-warning me-2"></i> Expedition Booking Engine</h3>
+            
+            <div class="alert alert-dark d-flex align-items-center" role="alert">
+              <i class="fas fa-certificate text-warning fa-2x me-3"></i>
+              <div>
+                <strong>Official Tourism Department Registered Agent</strong><br>
+                Permanent Reg No: <strong>11-2279/2024-DTO-SML</strong>
+              </div>
+            </div>
+
+            <!-- STEP 1: TRAVELLER DETAILS -->
+            <h5 class="font-serif border-bottom pb-2 mb-3 text-success">1. Lead Traveller Information</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Full Name *</label>
+                <input type="text" id="custName" class="form-control" placeholder="e.g. Dr. Alexander Wright" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email Address *</label>
+                <input type="email" id="custEmail" class="form-control" placeholder="alexander@example.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Phone Number *</label>
+                <input type="tel" id="custPhone" class="form-control" placeholder="+91 98160 00000" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Departure / Travel Date *</label>
+                <input type="date" id="travelDateInput" class="form-control" required>
+              </div>
+            </div>
+
+            <!-- STEP 2: EXPEDITION OPTIONS & ROOM CATEGORY -->
+            <h5 class="font-serif border-bottom pb-2 mb-3 text-success">2. Room Category & Passengers</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Adults (12+ yrs)</label>
+                <input type="number" id="adultsInput" class="form-control" value="2" min="1" max="20">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Children (5 - 11 yrs, 50% off)</label>
+                <input type="number" id="childrenInput" class="form-control" value="0" min="0" max="10">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Hotel Accommodation Tier</label>
+                <select id="hotelTierSelect" class="form-select">
+                  <option value="Deluxe 4-Star Resort" selected>Deluxe 4-Star Resort (Standard Included)</option>
+                  <option value="Luxury 5-Star Aman-Tier">Luxury 5-Star Aman Sanctuary (+35%)</option>
+                  <option value="Heritage Palace Suite">Royal Heritage Palace Suite (+50%)</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Meal Plan Choice</label>
+                <select id="mealPlanSelect" class="form-select">
+                  <option value="MAP (Breakfast & Dinner)" selected>MAP (Breakfast & Gourmet Dinner)</option>
+                  <option value="CP (Continental Breakfast Only)">CP (Continental Breakfast Only)</option>
+                  <option value="AP (All Meals Inclusive)">AP (All Meals & Beverages Included)</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Pickup Location</label>
+                <input type="text" id="pickupLocationInput" class="form-control" value="Airport / Main Railway Station Pickup">
+              </div>
+            </div>
+
+            <!-- STEP 3: PAYMENT GATEWAY SELECTOR -->
+            <h5 class="font-serif border-bottom pb-2 mb-3 text-success">3. Payment Gateway</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-4">
+                <div class="form-check border p-3 rounded">
+                  <input class="form-check-input" type="radio" name="paymentGateway" id="payRazorpay" value="Razorpay" checked>
+                  <label class="form-check-label fw-bold" for="payRazorpay">
+                    <i class="fas fa-credit-card text-primary me-1"></i> Razorpay
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check border p-3 rounded">
+                  <input class="form-check-input" type="radio" name="paymentGateway" id="payStripe" value="Stripe">
+                  <label class="form-check-label fw-bold" for="payStripe">
+                    <i class="fab fa-stripe text-info me-1"></i> Stripe
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check border p-3 rounded">
+                  <input class="form-check-input" type="radio" name="paymentGateway" id="payUPI" value="UPI">
+                  <label class="form-check-label fw-bold" for="payUPI">
+                    <i class="fas fa-mobile-alt text-success me-1"></i> Instant UPI
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold w-100 py-3 text-uppercase fw-bold fs-5">
+              <i class="fas fa-lock me-2"></i> Confirm Booking & Download Invoice
+            </button>
+          </form>
+        </div>
+
+        <!-- RIGHT SUMMARY CARD -->
+        <div class="col-lg-4">
+          <div class="bg-white p-4 rounded-3 shadow-sm border border-warning sticky-top" style="top: 100px;">
+            <h4 class="font-serif mb-3 border-bottom pb-2">Booking Summary</h4>
+            <h5 class="text-primary fw-bold mb-3" id="bookingPkgTitle">Royal Kashmir & Gulmarg Luxury Expedition</h5>
+            
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Package Base Rate</span>
+              <strong id="bookingBasePrice">₹48,500</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Subtotal (Travellers)</span>
+              <strong id="summarySubtotal">₹97,000</strong>
+            </div>
+            
+            <!-- COUPON FIELD -->
+            <div class="my-3">
+              <label class="form-label small text-muted">Promo / Coupon Code</label>
+              <div class="input-group">
+                <input type="text" id="couponInput" class="form-control form-control-sm text-uppercase" placeholder="Try HIMALAYA15">
+                <button type="button" class="btn btn-outline-dark btn-sm">Apply</button>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2 text-danger">
+              <span>Coupon Discount</span>
+              <strong id="summaryDiscount">-₹0</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="text-muted">Govt GST & Taxes (5%)</span>
+              <strong id="summaryGst">₹4,850</strong>
+            </div>
+
+            <hr>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="fw-bold fs-5">Total Amount:</span>
+              <span class="price-tag text-success display-6" id="summaryTotal">₹1,01,850</span>
+            </div>
+
+            <div class="p-3 bg-light rounded text-center small text-muted">
+              <i class="fas fa-file-invoice text-success me-1"></i> Automated PDF Invoice with Registration QR Code generated instantly upon confirmation.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

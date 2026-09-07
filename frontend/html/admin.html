@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Admin Control Center | Daffodil Himalayan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="d-flex">
+    <!-- ADMIN SIDEBAR -->
+    <div class="admin-sidebar col-md-2 d-none d-md-block">
+      <h4 class="font-serif text-warning mb-4">DAFFODIL ADMIN</h4>
+      <p class="small text-muted mb-4">Govt Reg: 11-2279/2024-DTO-SML</p>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link active" href="admin.html"><i class="fas fa-chart-line me-2"></i> Analytics Stats</a></li>
+        <li class="nav-item"><a class="nav-link" href="packages.html"><i class="fas fa-box me-2"></i> Manage Packages</a></li>
+        <li class="nav-item"><a class="nav-link" href="destinations.html"><i class="fas fa-map-marked-alt me-2"></i> Destinations</a></li>
+        <li class="nav-item"><a class="nav-link" href="hotels.html"><i class="fas fa-hotel me-2"></i> Hotels & Resorts</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-globe me-2"></i> Main Website</a></li>
+      </ul>
+    </div>
+
+    <!-- MAIN ADMIN PANEL -->
+    <div class="col-md-10 p-4 bg-light">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="font-serif m-0">Master Executive Control Center</h2>
+          <p class="text-muted small">Daffodil Himalayan Travel & Tourism Platform Analytics</p>
+        </div>
+        <span class="badge bg-success p-2"><i class="fas fa-circle text-white me-1"></i> Live Server Operational</span>
+      </div>
+
+      <!-- EXPORT SECTION -->
+      <div class="mb-4 bg-white p-3 rounded-3 shadow-sm border border-warning d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>
+          <h5 class="font-serif m-0 text-success"><i class="fas fa-file-excel me-2"></i> Excel Database Exports</h5>
+          <small class="text-muted">Download complete data sheets instantly for Excel reporting</small>
+        </div>
+        <div class="d-flex gap-2">
+          <a href="/api/admin/export/inquiries" class="btn btn-gold btn-sm fw-bold"><i class="fas fa-download me-1"></i> Customer Inquiries</a>
+          <a href="/api/admin/export/bookings" class="btn btn-outline-dark btn-sm fw-bold"><i class="fas fa-download me-1"></i> Bookings Ledger</a>
+          <a href="/api/admin/export/users" class="btn btn-outline-dark btn-sm fw-bold"><i class="fas fa-download me-1"></i> Registered Users</a>
+        </div>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="row g-4 mb-5">
+        <div class="col-md-3">
+          <div class="stat-card">
+            <span class="text-muted small uppercase">Total Expeditions Booked</span>
+            <div class="stat-number" id="adminTotalBookings">0</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card">
+            <span class="text-muted small uppercase">Registered Users</span>
+            <div class="stat-number" id="adminTotalUsers">0</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card">
+            <span class="text-muted small uppercase">Active Tour Packages</span>
+            <div class="stat-number" id="adminTotalPackages">0</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-card">
+            <span class="text-muted small uppercase">Gross Revenue (INR)</span>
+            <div class="stat-number text-success" id="adminTotalRevenue">₹0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT BOOKINGS TABLE -->
+      <div class="bg-white p-4 rounded-3 shadow-sm">
+        <h4 class="font-serif mb-3">Recent Customer Reservations</h4>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>Booking ID</th>
+                <th>Customer</th>
+                <th>Package Name</th>
+                <th>Travel Date</th>
+                <th>Amount</th>
+                <th>Payment Status</th>
+                <th>Invoice</th>
+              </tr>
+            </thead>
+            <tbody id="adminBookingsTableBody">
+              <!-- Rendered via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
