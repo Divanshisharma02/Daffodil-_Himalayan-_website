@@ -345,7 +345,7 @@ function updateBookPage() {
 
   document.getElementById('bookModalTitle').textContent = currentStory.title;
   document.getElementById('bookPageCounter').textContent = `Page ${pageData.pageNumber} of ${totalPages}`;
-  
+
   const contentArea = document.getElementById('bookPageContent');
   if (contentArea) {
     contentArea.style.opacity = '0';
@@ -509,7 +509,7 @@ async function fetchGalleryPhotos() {
   if (!container) return;
 
   try {
-    const res = await fetch('/api/gallery');
+    const res = await fetch('https://daffodil-himalayan-website.onrender.com/api/gallery');
     const data = await res.json();
 
     if (data.success && data.photos) {
@@ -530,7 +530,7 @@ function renderGalleryGrid(photos) {
   }
 
   container.innerHTML = photos.map(p => {
-    const commentsListHTML = p.comments && p.comments.length > 0 
+    const commentsListHTML = p.comments && p.comments.length > 0
       ? p.comments.map(c => `
           <div class="mb-1 p-2 bg-light rounded text-dark" style="font-size: 0.82rem; border-left: 3px solid #d4af37;">
             <strong>${c.uploaderName}:</strong> <span>${c.text}</span>
@@ -585,7 +585,7 @@ function renderGalleryGrid(photos) {
       const photoId = form.getAttribute('data-photo-id');
       const authorInput = form.querySelector('.comment-author-input');
       const textInput = form.querySelector('.comment-text-input');
-      
+
       const uploaderName = authorInput.value.trim();
       const text = textInput.value.trim();
 
