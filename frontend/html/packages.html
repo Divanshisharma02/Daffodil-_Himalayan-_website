@@ -101,14 +101,38 @@
   <script src="js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('packagesContainer');
+      if (container) {
+        container.innerHTML = `
+          <div class="col-12 text-center text-muted py-5">
+            <div class="spinner-border text-warning mb-3" role="status"></div>
+            <p class="lead">Loading curated luxury expeditions...</p>
+          </div>`;
+      }
+
       try {
-        const res = await fetch('https://daffodil-himalayan-website.onrender.com/api/packages');
+        const apiUrl = window.getApiUrl ? window.getApiUrl('/api/packages') : 'https://daffodil-himalayan-website.onrender.com/api/packages';
+        const res = await fetch(apiUrl);
+        if (!res.ok) {
+          throw new Error(`Server returned HTTP ${res.status}`);
+        }
         const data = await res.json();
-        if (data.success && data.packages) {
+        if (data.success && data.packages && data.packages.length > 0) {
           renderPackages(data.packages);
+        } else {
+          throw new Error('No packages returned from server');
         }
       } catch (e) {
-        console.error(e);
+        console.error('Packages error:', e);
+        if (container) {
+          container.innerHTML = `
+            <div class="col-12 text-center py-5">
+              <i class="fas fa-mountain text-warning fa-3x mb-3"></i>
+              <h4 class="font-serif">Connecting to Himalayan Expeditions Server...</h4>
+              <p class="text-muted">The live server may be waking up from standby. Please give it a few seconds.</p>
+              <button onclick="location.reload()" class="btn btn-gold mt-2 px-4"><i class="fas fa-sync-alt me-2"></i> Reload Packages</button>
+            </div>`;
+        }
       }
     });
 

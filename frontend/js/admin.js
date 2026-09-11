@@ -4,7 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchAdminStats() {
   try {
-    const res = await fetch('/api/admin/stats');
+    const apiUrl = window.getApiUrl ? window.getApiUrl('/api/admin/stats') : 'https://daffodil-himalayan-website.onrender.com/api/admin/stats';
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`Server returned HTTP ${res.status}`);
+    }
     const data = await res.json();
 
     if (data.success) {
@@ -24,6 +28,12 @@ async function fetchAdminStats() {
 
       renderRecentBookingsTable(data.recentBookings);
       renderRecentInquiriesTable(data.recentInquiries);
+
+      // Adjust all static /api/ links on the page (Excel downloads) to target live backend if needed
+      document.querySelectorAll('a[href^="/api/"]').forEach(a => {
+        const current = a.getAttribute('href');
+        a.setAttribute('href', window.getApiUrl(current));
+      });
     }
   } catch (err) {
     console.error('Error fetching admin statistics:', err);
@@ -43,7 +53,7 @@ function renderRecentBookingsTable(bookings) {
       <td class="fw-bold text-success">₹${(b.totalPrice || 0).toLocaleString()}</td>
       <td><span class="badge bg-success">${b.bookingStatus || 'Confirmed'}</span></td>
       <td>
-        <a href="/api/bookings/${b.bookingId}/invoice" class="btn btn-sm btn-outline-dark" target="_blank">
+        <a href="${window.getApiUrl ? window.getApiUrl(`/api/bookings/${b.bookingId}/invoice`) : `/api/bookings/${b.bookingId}/invoice`}" class="btn btn-sm btn-outline-dark" target="_blank">
           <i class="fas fa-file-pdf text-danger"></i> PDF
         </a>
       </td>

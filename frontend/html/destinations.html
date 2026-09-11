@@ -102,7 +102,11 @@
       renderDestinations(fallbackDestinations);
 
       try {
-        const res = await fetch('/api/destinations');
+        const apiUrl = window.getApiUrl ? window.getApiUrl('/api/destinations') : 'https://daffodil-himalayan-website.onrender.com/api/destinations';
+        const res = await fetch(apiUrl);
+        if (!res.ok) {
+          throw new Error(`Server returned HTTP ${res.status}`);
+        }
         const data = await res.json();
         if (data.success && data.destinations && data.destinations.length > 0) {
           renderDestinations(data.destinations);

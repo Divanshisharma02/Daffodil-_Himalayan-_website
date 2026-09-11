@@ -473,7 +473,8 @@ async function initCommunityGallery() {
 
       btn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i> Saving to Gallery...`;
 
-      const res = await fetch('/api/gallery/upload', {
+      const uploadUrl = window.getApiUrl ? window.getApiUrl('/api/gallery/upload') : 'https://daffodil-himalayan-website.onrender.com/api/gallery/upload';
+      const res = await fetch(uploadUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -482,6 +483,11 @@ async function initCommunityGallery() {
           caption
         })
       });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Server returned HTTP ${res.status}: ${errorText || 'Upload failed'}`);
+      }
 
       const data = await res.json();
       if (data.success) {
@@ -509,7 +515,11 @@ async function fetchGalleryPhotos() {
   if (!container) return;
 
   try {
-    const res = await fetch('https://daffodil-himalayan-website.onrender.com/api/gallery');
+    const galleryUrl = window.getApiUrl ? window.getApiUrl('/api/gallery') : 'https://daffodil-himalayan-website.onrender.com/api/gallery';
+    const res = await fetch(galleryUrl);
+    if (!res.ok) {
+      throw new Error(`Server returned HTTP ${res.status}`);
+    }
     const data = await res.json();
 
     if (data.success && data.photos) {
@@ -592,11 +602,17 @@ function renderGalleryGrid(photos) {
       if (!uploaderName || !text) return;
 
       try {
-        const res = await fetch(`/api/gallery/${photoId}/comments`, {
+        const commentUrl = window.getApiUrl ? window.getApiUrl(`/api/gallery/${photoId}/comments`) : `https://daffodil-himalayan-website.onrender.com/api/gallery/${photoId}/comments`;
+        const res = await fetch(commentUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ uploaderName, text })
         });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(`Server returned HTTP ${res.status}: ${errorText || 'Comment failed'}`);
+        }
 
         const data = await res.json();
         if (data.success) {

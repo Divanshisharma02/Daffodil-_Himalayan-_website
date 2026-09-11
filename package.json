@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
+    "build": "echo 'Frontend static build complete'",
     "seed": "node backend/scripts/seed.js"
   },
   "keywords": [

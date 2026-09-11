@@ -9,7 +9,11 @@ let currentPackageData = null;
 
 async function fetchPackageForBooking(slug) {
   try {
-    const res = await fetch(`/api/packages/${slug}`);
+    const apiUrl = window.getApiUrl ? window.getApiUrl(`/api/packages/${slug}`) : `https://daffodil-himalayan-website.onrender.com/api/packages/${slug}`;
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`Server returned HTTP ${res.status}`);
+    }
     const data = await res.json();
     if (data.success && data.package) {
       currentPackageData = data.package;
@@ -115,11 +119,17 @@ async function handleBookingSubmit(e) {
   };
 
   try {
-    const res = await fetch('/api/bookings', {
+    const bookingApiUrl = window.getApiUrl ? window.getApiUrl('/api/bookings') : 'https://daffodil-himalayan-website.onrender.com/api/bookings';
+    const res = await fetch(bookingApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Server returned HTTP ${res.status}: ${errorText || 'Booking failed'}`);
+    }
 
     const data = await res.json();
     if (data.success && data.booking) {

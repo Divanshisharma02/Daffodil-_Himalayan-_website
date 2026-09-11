@@ -36,7 +36,8 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Serve Frontend Static Files
+// Serve Frontend Static Files (Both html folder and root frontend assets)
+app.use(express.static(path.join(__dirname, '../frontend/html')));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // API Endpoints
@@ -93,7 +94,7 @@ app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api')) {
     return next();
   }
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/html/index.html'));
 });
 
 // Error Middleware

@@ -1,3 +1,41 @@
+// ==========================================================
+// CENTRALIZED API CONFIGURATION & CROSS-ORIGIN PROXY HANDLER
+// ==========================================================
+const BACKEND_RENDER_URL = 'https://daffodil-himalayan-website.onrender.com';
+
+const isLocalhost = Boolean(
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1' ||
+  window.location.hostname === '::1'
+);
+
+// If running on local server or backend domain directly, use relative paths. Otherwise route to live Render backend.
+window.API_BASE_URL = (isLocalhost || window.location.hostname.includes('daffodil-himalayan-website'))
+  ? ''
+  : BACKEND_RENDER_URL;
+
+window.getApiUrl = function(path) {
+  if (!path || typeof path !== 'string') return path;
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  const cleanPath = path.startsWith('/') ? path : '/' + path;
+  return `${window.API_BASE_URL}${cleanPath}`;
+};
+
+// Global Fetch Interceptor: Automatically reroutes any relative /api/ calls to the backend on live frontend domain
+(function() {
+  const originalFetch = window.fetch;
+  window.fetch = function(input, init) {
+    if (window.API_BASE_URL) {
+      if (typeof input === 'string' && input.startsWith('/api/')) {
+        input = window.API_BASE_URL + input;
+      } else if (input && typeof input === 'object' && typeof input.url === 'string' && input.url.startsWith('/api/')) {
+        input = new Request(window.API_BASE_URL + input.url, input);
+      }
+    }
+    return originalFetch.call(this, input, init);
+  };
+})();
+
 // Global State & Currency Handler
 window.DaffodilState = {
   currency: localStorage.getItem('daffodil_currency') || 'INR',
@@ -349,7 +387,8 @@ function setupGlobalModalFormHandlers() {
 
     // Log to backend Excel sheet
     try {
-      await fetch('/api/inquiries', {
+      const apiUrl = window.getApiUrl ? window.getApiUrl('/api/inquiries') : 'https://daffodil-himalayan-website.onrender.com/api/inquiries';
+      await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

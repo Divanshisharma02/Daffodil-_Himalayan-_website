@@ -1,23 +1,70 @@
 // Gallery controller handles public explorer photo uploads & comments
 const fs = require('fs');
 const path = require('path');
-const seedData = require('../scripts/mockData');
+
+const defaultGalleryPhotos = [
+  {
+    _id: 'photo_init_1',
+    imageUrl: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=800&q=80',
+    uploaderName: 'Captain Vikram Malhotra',
+    caption: 'Dal Lake Shikara morning reflections in Srinagar, Kashmir',
+    comments: [
+      { uploaderName: 'Aarav Sharma', text: 'Stunning serenity on the waters!', createdAt: new Date() }
+    ],
+    createdAt: new Date('2026-08-15')
+  },
+  {
+    _id: 'photo_init_2',
+    imageUrl: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=800&q=80',
+    uploaderName: 'Dr. Rohini Sen',
+    caption: 'Golden sunrise across the Solang Valley snow peaks in Manali',
+    comments: [],
+    createdAt: new Date('2026-08-20')
+  },
+  {
+    _id: 'photo_init_3',
+    imageUrl: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80',
+    uploaderName: 'Devansh Kapoor',
+    caption: 'Majestic sacred temple architecture at Kedarnath Dham',
+    comments: [
+      { uploaderName: 'Pooja Nair', text: 'Jai Bholenath! Truly divine darshan.', createdAt: new Date() }
+    ],
+    createdAt: new Date('2026-08-25')
+  },
+  {
+    _id: 'photo_init_4',
+    imageUrl: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80',
+    uploaderName: 'Ananya Deshmukh',
+    caption: 'Taj Mahal marble dome glistening under early morning sunrise',
+    comments: [],
+    createdAt: new Date('2026-09-01')
+  },
+  {
+    _id: 'photo_init_5',
+    imageUrl: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
+    uploaderName: 'Kabir & Rhea',
+    caption: 'Turquoise lagoons and overwater villas in the Maldives',
+    comments: [],
+    createdAt: new Date('2026-09-03')
+  },
+  {
+    _id: 'photo_init_6',
+    imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+    uploaderName: 'Siddharth Varma',
+    caption: 'Royal heritage courtyards of Rajasthan luxury palace resort',
+    comments: [],
+    createdAt: new Date('2026-09-05')
+  }
+];
 
 // In-Memory storage for uploaded gallery photos
-let galleryPhotos = (seedData.gallery || []).map((img, idx) => ({
-  _id: `photo_${idx + 1}`,
-  imageUrl: typeof img === 'string' ? img : img.imageUrl,
-  uploaderName: img.uploaderName || 'Daffodil Explorer',
-  caption: img.caption || 'Himalayan Expedition',
-  comments: img.comments || [],
-  createdAt: new Date()
-}));
+let galleryPhotos = [...defaultGalleryPhotos];
 
 const getGalleryPhotos = async (req, res) => {
   try {
     res.json({ success: true, count: galleryPhotos.length, photos: galleryPhotos });
   } catch (err) {
-    res.json({ success: true, count: 0, photos: [] });
+    res.json({ success: true, count: defaultGalleryPhotos.length, photos: defaultGalleryPhotos });
   }
 };
 
@@ -58,8 +105,11 @@ const uploadGalleryPhoto = async (req, res) => {
       const filePath = path.join(uploadsDir, filename);
       await fs.promises.writeFile(filePath, imageBuffer);
 
-      imageUrl = `/uploads/${filename}`;
+      const host = req.get('host') || 'daffodil-himalayan-website.onrender.com';
+      const protocol = req.protocol === 'https' || req.get('x-forwarded-proto') === 'https' ? 'https' : 'http';
+      imageUrl = `${protocol}://${host}/uploads/${filename}`;
     } catch (writeErr) {
+      // If disk write fails or ephemeral, keep the data URI as image source
       imageUrl = image;
     }
 
