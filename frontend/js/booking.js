@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const pkgSlug = urlParams.get('package') || 'royal-kashmir-luxury-expedition';
 
   fetchPackageForBooking(pkgSlug);
+
+  window.addEventListener('daffodil:currencyChange', () => {
+    if (currentPackageData) {
+      renderBookingForm(currentPackageData);
+    }
+  });
 });
 
 let currentPackageData = null;

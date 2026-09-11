@@ -130,6 +130,7 @@
         const data = await res.json();
         if (data.success && data.package) {
           const p = data.package;
+          window.currentLoadedPkg = p;
           document.getElementById('detailTitle').innerText = p.title;
           document.getElementById('detailCountry').innerText = p.country;
           document.getElementById('detailOverview').innerText = p.overview;
@@ -141,6 +142,12 @@
           if (window.renderItineraryFlowGraph) {
             window.renderItineraryFlowGraph('itineraryGraphContainer', p.itinerary);
           }
+
+          window.addEventListener('daffodil:currencyChange', () => {
+            if (window.currentLoadedPkg) {
+              document.getElementById('detailPrice').innerText = window.formatPrice(window.currentLoadedPkg.priceINR);
+            }
+          });
 
           if (p.inclusions) {
             document.getElementById('inclusionsList').innerHTML = p.inclusions.map(i => `<li class="mb-2"><i class="fas fa-check text-success me-2"></i> ${i}</li>`).join('');

@@ -46,6 +46,7 @@ window.DaffodilState = {
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCurrencySelector();
+  applyGlobalCurrency();
   initFullscreenToggle();
   updateAuthHeader();
   initGlobalBookNowModal(); // Initialize the global Book Now Enquiry Modal
@@ -91,16 +92,100 @@ function initNavbar() {
 }
 
 function initCurrencySelector() {
-  const selector = document.getElementById('currencySelector');
-  if (selector) {
-    selector.value = window.DaffodilState.currency;
-    selector.addEventListener('change', (e) => {
-      window.DaffodilState.currency = e.target.value;
-      localStorage.setItem('daffodil_currency', e.target.value);
-      window.location.reload();
-    });
-  }
+  const currentCurr = window.DaffodilState.currency || 'INR';
+  const selectors = document.querySelectorAll('.currency-selector, #currencySelector');
+  
+  selectors.forEach(selector => {
+    selector.value = currentCurr;
+    selector.onchange = (e) => {
+      const newCurrency = e.target.value;
+      window.DaffodilState.currency = newCurrency;
+      localStorage.setItem('daffodil_currency', newCurrency);
+
+      // Sync all currency dropdowns on the page
+      document.querySelectorAll('.currency-selector, #currencySelector').forEach(s => {
+        s.value = newCurrency;
+      });
+
+      // Update all prices across the page
+      applyGlobalCurrency();
+
+      // Dispatch event for specialized calculators (e.g. booking page)
+      window.dispatchEvent(new CustomEvent('daffodil:currencyChange', { detail: { currency: newCurrency } }));
+    };
+  });
 }
+
+// Universal DOM Price Converter
+function applyGlobalCurrency() {
+  const currency = window.DaffodilState.currency || 'INR';
+  const rate = window.DaffodilState.exchangeRateUSD || 0.012;
+
+  // Sync all dropdowns
+  document.querySelectorAll('.currency-selector, #currencySelector').forEach(sel => {
+    sel.value = currency;
+  });
+
+  // Candidate selectors that display package / tour / adventure / hotel pricing
+  const selectorsToScan = [
+    '.price-tag',
+    '.card-price',
+    '[data-price-inr]',
+    '#detailPrice',
+    '#bookingBasePrice',
+    '#summarySubtotal',
+    '#summaryDiscount',
+    '#summaryGst',
+    '#summaryTotal',
+    '.fw-bold.text-success'
+  ];
+
+  document.querySelectorAll(selectorsToScan.join(',')).forEach(el => {
+    // 1. If explicit data-price-inr attribute is provided
+    if (el.hasAttribute('data-price-inr')) {
+      const rawINR = parseFloat(el.getAttribute('data-price-inr'));
+      const suffix = el.getAttribute('data-price-suffix') || '';
+      if (!isNaN(rawINR)) {
+        if (currency === 'USD') {
+          const usd = Math.round(rawINR * rate);
+          el.innerHTML = `$${usd.toLocaleString('en-US')}${suffix}`;
+        } else {
+          el.innerHTML = `₹${Math.round(rawINR).toLocaleString('en-IN')}${suffix}`;
+        }
+      }
+      return;
+    }
+
+    // 2. Scan innerHTML for INR currency symbol or cached original template
+    const currentHtml = el.innerHTML;
+    if (currentHtml.includes('₹') || el.hasAttribute('data-orig-inr-html')) {
+      if (!el.hasAttribute('data-orig-inr-html')) {
+        const match = currentHtml.match(/₹\s*([0-9,]+)/);
+        if (match) {
+          const num = parseInt(match[1].replace(/,/g, ''), 10);
+          if (!isNaN(num)) {
+            el.setAttribute('data-orig-inr-amount', num);
+            el.setAttribute('data-orig-inr-html', currentHtml);
+          }
+        }
+      }
+
+      if (el.hasAttribute('data-orig-inr-amount')) {
+        const amount = parseFloat(el.getAttribute('data-orig-inr-amount'));
+        const origTemplate = el.getAttribute('data-orig-inr-html');
+        if (currency === 'USD') {
+          const usd = Math.round(amount * rate);
+          el.innerHTML = origTemplate.replace(/₹\s*[0-9,]+/, `$${usd.toLocaleString('en-US')}`);
+        } else {
+          el.innerHTML = origTemplate;
+        }
+      }
+    }
+  });
+}
+
+// Expose applyGlobalCurrency globally
+window.applyGlobalCurrency = applyGlobalCurrency;
 
 function updateAuthHeader() {
   const authContainer = document.getElementById('authNavContainer');
@@ -108,19 +193,29 @@ function updateAuthHeader() {
 
   const user = window.DaffodilState.user;
   if (user) {
+    // Ensure currency selector is preserved and not removed when user is logged in
+    const currentCurr = window.DaffodilState.currency || 'INR';
     authContainer.innerHTML = `
-      <div class="dropdown d-inline-block">
-        <button class="btn btn-gold btn-sm dropdown-toggle text-truncate" type="button" data-bs-toggle="dropdown" style="max-width: 180px;">
-          <i class="fas fa-user-circle me-1"></i> ${user.name}
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end shadow border-warning">
-          <li><a class="dropdown-item fw-semibold" href="dashboard.html"><i class="fas fa-suitcase me-2 text-success"></i>My Bookings</a></li>
-          ${user.role === 'admin' ? '<li><a class="dropdown-item text-danger fw-bold" href="admin.html"><i class="fas fa-user-shield me-2"></i>Admin Panel</a></li>' : ''}
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-muted" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-        </ul>
+      <div class="d-flex align-items-center gap-2">
+        <select id="currencySelector" class="currency-selector" title="Select Currency">
+          <option value="INR" ${currentCurr === 'INR' ? 'selected' : ''}>₹ INR</option>
+          <option value="USD" ${currentCurr === 'USD' ? 'selected' : ''}>$ USD</option>
+        </select>
+        <div class="dropdown d-inline-block">
+          <button class="btn btn-gold btn-sm dropdown-toggle text-truncate" type="button" data-bs-toggle="dropdown" style="max-width: 180px;">
+            <i class="fas fa-user-circle me-1"></i> ${user.name}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow border-warning">
+            <li><a class="dropdown-item fw-semibold" href="dashboard.html"><i class="fas fa-suitcase me-2 text-success"></i>My Bookings</a></li>
+            ${user.role === 'admin' ? '<li><a class="dropdown-item text-danger fw-bold" href="admin.html"><i class="fas fa-user-shield me-2"></i>Admin Panel</a></li>' : ''}
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-muted" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+          </ul>
+        </div>
       </div>
     `;
+
+    initCurrencySelector();
 
     document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
@@ -132,11 +227,15 @@ function updateAuthHeader() {
 }
 
 window.formatPrice = function(amountINR) {
-  if (window.DaffodilState.currency === 'USD') {
-    const usd = Math.round(amountINR * window.DaffodilState.exchangeRateUSD);
-    return `$${usd.toLocaleString()}`;
+  const num = typeof amountINR === 'number'
+    ? amountINR
+    : parseFloat(String(amountINR || 0).replace(/[^0-9.]/g, '')) || 0;
+
+  if (window.DaffodilState && window.DaffodilState.currency === 'USD') {
+    const usd = Math.round(num * (window.DaffodilState.exchangeRateUSD || 0.012));
+    return `$${usd.toLocaleString('en-US')}`;
   }
-  return `₹${amountINR.toLocaleString()}`;
+  return `₹${Math.round(num).toLocaleString('en-IN')}`;
 };
 
 // Global Booking Modal Handler (injects the 2-step modal & intercepts booking click events)

@@ -118,6 +118,7 @@
         }
         const data = await res.json();
         if (data.success && data.packages && data.packages.length > 0) {
+          loadedPackages = data.packages;
           renderPackages(data.packages);
         } else {
           throw new Error('No packages returned from server');
@@ -133,6 +134,13 @@
               <button onclick="location.reload()" class="btn btn-gold mt-2 px-4"><i class="fas fa-sync-alt me-2"></i> Reload Packages</button>
             </div>`;
         }
+      }
+    });
+
+    let loadedPackages = [];
+    window.addEventListener('daffodil:currencyChange', () => {
+      if (loadedPackages && loadedPackages.length > 0) {
+        renderPackages(loadedPackages);
       }
     });
 
