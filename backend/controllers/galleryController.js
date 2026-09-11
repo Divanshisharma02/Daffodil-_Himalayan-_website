@@ -1,27 +1,23 @@
 // Gallery controller handles public explorer photo uploads & comments
 const fs = require('fs');
 const path = require('path');
-const GalleryPhoto = require('../models/GalleryPhoto');
-const { getDBStatus } = require('../config/db');
+const seedData = require('../scripts/mockData');
 
-// In-Memory fallback storage for offline DB use
-let mockGalleryPhotos = [];
+// In-Memory storage for uploaded gallery photos
+let galleryPhotos = (seedData.gallery || []).map((img, idx) => ({
+  _id: `photo_${idx + 1}`,
+  imageUrl: typeof img === 'string' ? img : img.imageUrl,
+  uploaderName: img.uploaderName || 'Daffodil Explorer',
+  caption: img.caption || 'Himalayan Expedition',
+  comments: img.comments || [],
+  createdAt: new Date()
+}));
 
 const getGalleryPhotos = async (req, res) => {
   try {
-    if (!getDBStatus()) {
-      return res.json({ success: true, count: mockGalleryPhotos.length, photos: mockGalleryPhotos });
-    }
-
-    let photos = await GalleryPhoto.find().sort({ createdAt: -1 });
-    if (!photos || photos.length === 0) {
-      // Sync mock data to DB if empty
-      return res.json({ success: true, count: mockGalleryPhotos.length, photos: mockGalleryPhotos });
-    }
-
-    res.json({ success: true, count: photos.length, photos });
+    res.json({ success: true, count: galleryPhotos.length, photos: galleryPhotos });
   } catch (err) {
-    res.json({ success: true, count: mockGalleryPhotos.length, photos: mockGalleryPhotos });
+    res.json({ success: true, count: 0, photos: [] });
   }
 };
 
@@ -33,10 +29,8 @@ const uploadGalleryPhoto = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Please provide uploader name, caption, and image file.' });
     }
 
-    let imageUrl = '';
-    let isBase64Fallback = false;
+    let imageUrl = image;
 
-    // Process Base64 image upload safely without regex re-dos
     try {
       const uploadsDir = path.join(__dirname, '../../frontend/uploads');
       if (!fs.existsSync(uploadsDir)) {
@@ -60,39 +54,26 @@ const uploadGalleryPhoto = async (req, res) => {
       }
 
       const imageBuffer = Buffer.from(base64Data, 'base64');
-      const sizeMb = (imageBuffer.length / (1024 * 1024)).toFixed(2);
-
       const filename = `gallery_${Date.now()}_${Math.floor(Math.random() * 1000)}.${extension}`;
       const filePath = path.join(uploadsDir, filename);
       await fs.promises.writeFile(filePath, imageBuffer);
 
       imageUrl = `/uploads/${filename}`;
-      console.log(`[Gallery Upload] Successfully processed & saved ${extension.toUpperCase()} photo (${sizeMb} MB) by ${uploaderName}`);
     } catch (writeErr) {
-      console.warn('[Gallery Upload warning] File write failed, falling back to database storage:', writeErr.message);
-      imageUrl = image; // Use base64 data url directly
-      isBase64Fallback = true;
+      imageUrl = image;
     }
 
-    const newPhotoData = {
+    const newPhoto = {
+      _id: `photo_${Date.now()}`,
       imageUrl,
       uploaderName,
       caption,
-      comments: []
+      comments: [],
+      createdAt: new Date()
     };
 
-    if (getDBStatus()) {
-      const dbPhoto = await GalleryPhoto.create(newPhotoData);
-      res.status(201).json({ success: true, message: 'Photo uploaded successfully.', photo: dbPhoto });
-    } else {
-      const mockPhoto = {
-        _id: `mock_${Date.now()}`,
-        ...newPhotoData,
-        createdAt: new Date()
-      };
-      mockGalleryPhotos.unshift(mockPhoto);
-      res.status(201).json({ success: true, message: 'Photo uploaded successfully (in-memory mode).', photo: mockPhoto });
-    }
+    galleryPhotos.unshift(newPhoto);
+    res.status(201).json({ success: true, message: 'Photo uploaded successfully.', photo: newPhoto });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -107,29 +88,19 @@ const addGalleryComment = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Please provide uploader name and comment text.' });
     }
 
+    const photo = galleryPhotos.find(p => p._id === photoId);
+    if (!photo) {
+      return res.status(404).json({ success: false, message: 'Photo not found.' });
+    }
+
     const newComment = {
       uploaderName,
       text,
       createdAt: new Date()
     };
 
-    if (getDBStatus() && !photoId.startsWith('mock_')) {
-      const photo = await GalleryPhoto.findById(photoId);
-      if (!photo) {
-        return res.status(404).json({ success: false, message: 'Photo not found.' });
-      }
-      photo.comments.push(newComment);
-      await photo.save();
-      return res.json({ success: true, message: 'Comment added successfully.', photo });
-    } else {
-      // Find in-memory
-      const photo = mockGalleryPhotos.find(p => p._id === photoId);
-      if (!photo) {
-        return res.status(404).json({ success: false, message: 'Photo not found.' });
-      }
-      photo.comments.push(newComment);
-      return res.json({ success: true, message: 'Comment added successfully (in-memory mode).', photo });
-    }
+    photo.comments.push(newComment);
+    res.json({ success: true, message: 'Comment added successfully.', photo });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

@@ -133,6 +133,7 @@ function getInquiriesFromCsv() {
 initCsvFiles();
 
 module.exports = {
+  initCsvFiles,
   logUserToCsv,
   logInquiryToCsv,
   logBookingToCsv,

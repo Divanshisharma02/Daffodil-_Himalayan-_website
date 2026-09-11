@@ -88,8 +88,7 @@ async function handleBookingSubmit(e) {
   const children = document.getElementById('childrenInput').value;
   const hotelCategory = document.getElementById('hotelTierSelect').value;
   const mealPlan = document.getElementById('mealPlanSelect').value;
-  const pickupLocation = document.getElementById('pickupLocationInput').value;
-  const paymentMethod = document.querySelector('input[name="paymentGateway"]:checked')?.value || 'Razorpay';
+  const paymentMethod = 'Direct Agency Booking';
   const couponCode = document.getElementById('couponInput').value;
 
   if (!customerName || !customerEmail || !travelDate) {
@@ -124,8 +123,8 @@ async function handleBookingSubmit(e) {
 
     const data = await res.json();
     if (data.success && data.booking) {
-      alert(`🎉 Booking Confirmed!\nBooking ID: ${data.booking.bookingId}\nAn official tax invoice has been generated.`);
-      window.location.href = `dashboard.html?bookingId=${data.booking.bookingId}`;
+      alert(`🎉 Tour Reservation Confirmed!\nBooking ID: ${data.booking.bookingId}\nYour booking has been recorded in the official Excel ledger.`);
+      window.location.href = `packages.html`;
     } else {
       alert('Booking failed: ' + (data.message || 'Error processing request'));
     }

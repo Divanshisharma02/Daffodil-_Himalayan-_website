@@ -1,5 +1,3 @@
-const Booking = require('../models/Booking');
-const Coupon = require('../models/Coupon');
 const seedData = require('../scripts/mockData');
 const { sendEmail } = require('../utils/emailService');
 const { logBookingToCsv } = require('../utils/csvLogger');
@@ -22,7 +20,7 @@ const createBooking = async (req, res) => {
       currency = 'INR',
       basePrice = 25000,
       couponCode = '',
-      paymentMethod = 'Razorpay'
+      paymentMethod = 'Direct Agency Booking'
     } = req.body;
 
     if (!customerName || !customerEmail || !packageName || !travelDate) {
@@ -33,16 +31,8 @@ const createBooking = async (req, res) => {
     let totalBase = Number(basePrice) * Number(adults) + (Number(basePrice) * 0.5 * Number(children));
     let discountAmount = 0;
 
-    if (couponCode) {
-      const coupon = await Coupon.findOne({ code: couponCode.toUpperCase(), isActive: true });
-      if (coupon) {
-        discountAmount = (totalBase * coupon.discountPercentage) / 100;
-        if (currency === 'INR' && coupon.maxDiscountINR && discountAmount > coupon.maxDiscountINR) {
-          discountAmount = coupon.maxDiscountINR;
-        }
-      } else if (couponCode.toUpperCase() === 'HIMALAYA15') {
-        discountAmount = totalBase * 0.15;
-      }
+    if (couponCode && couponCode.trim().toUpperCase() === 'HIMALAYA15') {
+      discountAmount = Math.round(totalBase * 0.15);
     }
 
     const taxableAmount = Math.max(0, totalBase - discountAmount);
@@ -52,14 +42,15 @@ const createBooking = async (req, res) => {
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
     const bookingId = `DH-2026-${randomSuffix}`;
 
-    let bookingData = {
+    const bookingData = {
+      _id: `bk_${Date.now()}`,
       bookingId,
       customerName,
       customerEmail,
       customerPhone: customerPhone || '+91 98160 00000',
       packageName,
       travelDate,
-      travellers: { adults, children },
+      travellers: { adults: Number(adults), children: Number(children) },
       hotelCategory,
       mealPlan,
       pickupLocation,
@@ -70,14 +61,14 @@ const createBooking = async (req, res) => {
       gstAmount,
       totalPrice,
       couponCode,
-      paymentStatus: 'Paid',
+      paymentStatus: 'Reserved',
       bookingStatus: 'Confirmed',
-      paymentMethod,
-      paymentTransactionId: `TXN-${Date.now()}`,
-      invoiceUrl: `/api/bookings/${bookingId}/invoice`
+      paymentMethod: 'Direct Agency Booking',
+      invoiceUrl: `/api/bookings/${bookingId}/invoice`,
+      createdAt: new Date().toISOString()
     };
 
-    // Log booking to Excel CSV File
+    // Log booking directly to Excel CSV File
     logBookingToCsv({
       bookingId,
       customerName,
@@ -90,39 +81,34 @@ const createBooking = async (req, res) => {
       bookingStatus: 'Confirmed'
     });
 
-    let newBooking;
-    try {
-      newBooking = await Booking.create(bookingData);
-    } catch (e) {
-      bookingData._id = 'mock_' + Date.now();
-      newBooking = bookingData;
-      seedData.bookings.unshift(newBooking);
-    }
+    // Add to in-memory bookings list
+    seedData.bookings.unshift(bookingData);
 
     // Trigger Email Notification
     sendEmail({
       to: customerEmail,
-      subject: `Booking Confirmed: ${bookingId} - Daffodil Himalayan`,
+      subject: `Tour Reservation Confirmed: ${bookingId} - Daffodil Himalayan`,
       html: `
-        <div style="font-family: Arial, sans-serif; color: #0B1F3A; padding: 20px; border: 1px solid #D4AF37;">
-          <h2 style="color: #0B3D2E;">Booking Confirmation - Daffodil Himalayan</h2>
+        <div style="font-family: Arial, sans-serif; color: #0B1F3A; padding: 20px; border: 1px solid #D4AF37; border-radius: 8px;">
+          <h2 style="color: #0B3D2E; margin-top: 0;">Tour Reservation Confirmation - Daffodil Himalayan</h2>
           <p>Dear <strong>${customerName}</strong>,</p>
-          <p>Thank you for choosing Daffodil Himalayan (Govt Reg No: <strong>11-2279/2024-DTO-SML</strong>). Your journey has been confirmed!</p>
-          <hr />
-          <p><strong>Booking ID:</strong> ${bookingId}</p>
+          <p>Thank you for choosing Daffodil Himalayan (Govt Reg No: <strong>11-2279/2024-DTO-SML</strong>). Your journey reservation has been confirmed and logged in our executive booking records!</p>
+          <hr style="border: 0; border-top: 1px solid #E5E7EB; margin: 15px 0;" />
+          <p><strong>Reservation ID:</strong> ${bookingId}</p>
           <p><strong>Package:</strong> ${packageName}</p>
           <p><strong>Travel Date:</strong> ${new Date(travelDate).toLocaleDateString()}</p>
-          <p><strong>Total Paid:</strong> ${currency === 'USD' ? '$' : '₹'}${totalPrice.toLocaleString()}</p>
-          <hr />
-          <p>You can download your official PDF invoice inside your account dashboard.</p>
+          <p><strong>Estimated Total:</strong> ${currency === 'USD' ? '$' : '₹'}${totalPrice.toLocaleString()}</p>
+          <p><strong>Payment Mode:</strong> Direct Agency Settlement (Upon Arrival / Official Bank Transfer)</p>
+          <hr style="border: 0; border-top: 1px solid #E5E7EB; margin: 15px 0;" />
+          <p style="color: #666; font-size: 13px;">Our travel desk will contact you via WhatsApp / Phone to confirm pickup timings and assist with customized requests.</p>
         </div>
       `
     });
 
     res.status(201).json({
       success: true,
-      message: 'Booking created and confirmed successfully!',
-      booking: newBooking
+      message: 'Tour reservation confirmed and recorded successfully!',
+      booking: bookingData
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -132,17 +118,10 @@ const createBooking = async (req, res) => {
 const getUserBookings = async (req, res) => {
   try {
     const { email } = req.query;
-    let bookings = [];
+    let bookings = seedData.bookings;
     if (email) {
-      bookings = await Booking.find({ customerEmail: email }).sort({ createdAt: -1 });
-    } else {
-      bookings = await Booking.find().sort({ createdAt: -1 });
+      bookings = bookings.filter(b => b.customerEmail && b.customerEmail.toLowerCase() === email.toLowerCase());
     }
-
-    if (!bookings || bookings.length === 0) {
-      bookings = seedData.bookings;
-    }
-
     res.json({ success: true, count: bookings.length, bookings });
   } catch (error) {
     res.json({ success: true, count: seedData.bookings.length, bookings: seedData.bookings });
@@ -151,13 +130,10 @@ const getUserBookings = async (req, res) => {
 
 const getBookingById = async (req, res) => {
   try {
-    let booking = await Booking.findOne({ bookingId: req.params.id });
-    if (!booking) {
-      booking = seedData.bookings.find(b => b.bookingId === req.params.id) || seedData.bookings[0];
-    }
+    const booking = seedData.bookings.find(b => b.bookingId === req.params.id) || seedData.bookings[0];
     res.json({ success: true, booking });
   } catch (error) {
-    const fallback = seedData.bookings.find(b => b.bookingId === req.params.id) || seedData.bookings[0];
+    const fallback = seedData.bookings[0];
     res.json({ success: true, booking: fallback });
   }
 };

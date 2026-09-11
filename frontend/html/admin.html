@@ -18,6 +18,7 @@
       <p class="small text-muted mb-4">Govt Reg: 11-2279/2024-DTO-SML</p>
       <ul class="nav flex-column">
         <li class="nav-item"><a class="nav-link active" href="admin.html"><i class="fas fa-chart-line me-2"></i> Analytics Stats</a></li>
+        <li class="nav-item"><a class="nav-link text-warning fw-bold" href="#excelSection"><i class="fas fa-file-excel me-2"></i> Excel Spreadsheets</a></li>
         <li class="nav-item"><a class="nav-link" href="packages.html"><i class="fas fa-box me-2"></i> Manage Packages</a></li>
         <li class="nav-item"><a class="nav-link" href="destinations.html"><i class="fas fa-map-marked-alt me-2"></i> Destinations</a></li>
         <li class="nav-item"><a class="nav-link" href="hotels.html"><i class="fas fa-hotel me-2"></i> Hotels & Resorts</a></li>
@@ -27,24 +28,60 @@
 
     <!-- MAIN ADMIN PANEL -->
     <div class="col-md-10 p-4 bg-light">
-      <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
         <div>
           <h2 class="font-serif m-0">Master Executive Control Center</h2>
           <p class="text-muted small">Daffodil Himalayan Travel & Tourism Platform Analytics</p>
         </div>
-        <span class="badge bg-success p-2"><i class="fas fa-circle text-white me-1"></i> Live Server Operational</span>
+        <div class="d-flex gap-2 align-items-center">
+          <span class="badge bg-success p-2"><i class="fas fa-database me-1"></i> Excel CSV Engine Active</span>
+          <a href="index.html" class="btn btn-outline-dark btn-sm"><i class="fas fa-home me-1"></i> Visit Website</a>
+        </div>
       </div>
 
       <!-- EXPORT SECTION -->
-      <div class="mb-4 bg-white p-3 rounded-3 shadow-sm border border-warning d-flex justify-content-between align-items-center flex-wrap gap-2">
-        <div>
-          <h5 class="font-serif m-0 text-success"><i class="fas fa-file-excel me-2"></i> Excel Database Exports</h5>
-          <small class="text-muted">Download complete data sheets instantly for Excel reporting</small>
+      <div id="excelSection" class="mb-4 bg-white p-4 rounded-3 shadow-sm border border-warning">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3 border-bottom pb-3">
+          <div>
+            <h5 class="font-serif m-0 text-success"><i class="fas fa-file-excel me-2"></i> Official Excel Database Spreadsheets</h5>
+            <small class="text-muted">Click any button below to download the latest live data directly into Microsoft Excel (.CSV)</small>
+          </div>
+          <span class="badge bg-warning text-dark px-3 py-2 fw-bold"><i class="fas fa-sync-alt me-1"></i> Real-Time Sync</span>
         </div>
-        <div class="d-flex gap-2">
-          <a href="/api/admin/export/inquiries" class="btn btn-gold btn-sm fw-bold"><i class="fas fa-download me-1"></i> Customer Inquiries</a>
-          <a href="/api/admin/export/bookings" class="btn btn-outline-dark btn-sm fw-bold"><i class="fas fa-download me-1"></i> Bookings Ledger</a>
-          <a href="/api/admin/export/users" class="btn btn-outline-dark btn-sm fw-bold"><i class="fas fa-download me-1"></i> Registered Users</a>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center">
+              <div>
+                <strong class="d-block text-dark"><i class="fas fa-envelope-open-text text-primary me-2"></i>Customer Inquiries</strong>
+                <small class="text-muted">All web form & modal submissions</small>
+              </div>
+              <a href="/api/excel/inquiries" class="btn btn-gold btn-sm fw-bold shadow-sm" download>
+                <i class="fas fa-download me-1"></i> Download
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center">
+              <div>
+                <strong class="d-block text-dark"><i class="fas fa-book-open text-success me-2"></i>Bookings Ledger</strong>
+                <small class="text-muted">Tour reservations & itineraries</small>
+              </div>
+              <a href="/api/excel/bookings" class="btn btn-outline-dark btn-sm fw-bold shadow-sm" download>
+                <i class="fas fa-download me-1"></i> Download
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center">
+              <div>
+                <strong class="d-block text-dark"><i class="fas fa-users text-info me-2"></i>Registered Users</strong>
+                <small class="text-muted">Traveler user directory</small>
+              </div>
+              <a href="/api/excel/users" class="btn btn-outline-dark btn-sm fw-bold shadow-sm" download>
+                <i class="fas fa-download me-1"></i> Download
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -52,14 +89,14 @@
       <div class="row g-4 mb-5">
         <div class="col-md-3">
           <div class="stat-card">
-            <span class="text-muted small uppercase">Total Expeditions Booked</span>
+            <span class="text-muted small uppercase">Total Tour Reservations</span>
             <div class="stat-number" id="adminTotalBookings">0</div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="stat-card">
-            <span class="text-muted small uppercase">Registered Users</span>
-            <div class="stat-number" id="adminTotalUsers">0</div>
+            <span class="text-muted small uppercase">Customer Inquiries</span>
+            <div class="stat-number text-primary" id="adminTotalInquiries">0</div>
           </div>
         </div>
         <div class="col-md-3">
@@ -70,15 +107,43 @@
         </div>
         <div class="col-md-3">
           <div class="stat-card">
-            <span class="text-muted small uppercase">Gross Revenue (INR)</span>
+            <span class="text-muted small uppercase">Gross Booking Volume (INR)</span>
             <div class="stat-number text-success" id="adminTotalRevenue">₹0</div>
           </div>
         </div>
       </div>
 
+      <!-- RECENT CUSTOMER INQUIRIES TABLE -->
+      <div class="bg-white p-4 rounded-3 shadow-sm mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="font-serif m-0"><i class="fas fa-inbox text-warning me-2"></i> Recent Customer Inquiries (Excel Record)</h4>
+          <a href="/api/excel/inquiries" class="btn btn-sm btn-outline-success fw-bold"><i class="fas fa-file-excel me-1"></i> Export Inquiries</a>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-dark">
+              <tr>
+                <th>Submitted</th>
+                <th>Customer Name</th>
+                <th>Contact</th>
+                <th>Subject / Route</th>
+                <th>Message / Details</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody id="adminInquiriesTableBody">
+              <!-- Rendered via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- RECENT BOOKINGS TABLE -->
       <div class="bg-white p-4 rounded-3 shadow-sm">
-        <h4 class="font-serif mb-3">Recent Customer Reservations</h4>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="font-serif m-0"><i class="fas fa-calendar-check text-success me-2"></i> Recent Tour Reservations</h4>
+          <a href="/api/excel/bookings" class="btn btn-sm btn-outline-success fw-bold"><i class="fas fa-file-excel me-1"></i> Export Bookings</a>
+        </div>
         <div class="table-responsive">
           <table class="table table-hover align-middle">
             <thead class="table-dark">
@@ -88,7 +153,7 @@
                 <th>Package Name</th>
                 <th>Travel Date</th>
                 <th>Amount</th>
-                <th>Payment Status</th>
+                <th>Status</th>
                 <th>Invoice</th>
               </tr>
             </thead>

@@ -31,8 +31,8 @@ const generateInvoicePDF = (booking, res) => {
   doc.font('Helvetica-Bold').text('Customer:', 55, 215);
   doc.font('Helvetica').text(`${booking.customerName} (${booking.customerEmail})`, 130, 215);
 
-  doc.font('Helvetica-Bold').text('Payment Status:', 330, 195);
-  doc.fillColor(booking.paymentStatus === 'Paid' ? '#2E7D32' : '#D32F2F').font('Helvetica-Bold').text(booking.paymentStatus.toUpperCase(), 430, 195);
+  doc.font('Helvetica-Bold').text('Booking Status:', 330, 195);
+  doc.fillColor('#2E7D32').font('Helvetica-Bold').text((booking.bookingStatus || 'CONFIRMED').toUpperCase(), 430, 195);
 
   doc.fillColor('#0B1F3A').font('Helvetica-Bold').text('Travel Date:', 330, 215);
   doc.font('Helvetica').text(new Date(booking.travelDate).toLocaleDateString(), 430, 215);
