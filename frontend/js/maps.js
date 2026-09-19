@@ -2,8 +2,13 @@ window.initDestinationMap = function(containerId, coords, attractions) {
   const mapElement = document.getElementById(containerId);
   if (!mapElement || typeof L === 'undefined') return;
 
-  const lat = coords?.lat || 34.0837;
-  const lng = coords?.lng || 74.7973;
+  const lat = Number(coords?.lat) || 34.0837;
+  const lng = Number(coords?.lng) || 74.7973;
+
+  if (mapElement._leaflet_id) {
+    mapElement._leaflet_id = null;
+    mapElement.innerHTML = '';
+  }
 
   const map = L.map(containerId).setView([lat, lng], 11);
 

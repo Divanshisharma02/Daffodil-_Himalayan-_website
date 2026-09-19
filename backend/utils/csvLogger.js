@@ -16,8 +16,37 @@ const bookingsCsvPath = path.join(dataDir, 'bookings.csv');
 // Helper to sanitize CSV field values to prevent CSV injection or breaking rows
 function sanitizeCsvField(field) {
   if (field === null || field === undefined) return '""';
-  const stringVal = String(field).replace(/"/g, '""');
+  const stringVal = String(field)
+    .replace(/\r\n/g, ' | ')
+    .replace(/\r/g, ' | ')
+    .replace(/\n/g, ' | ')
+    .replace(/"/g, '""');
   return `"${stringVal}"`;
+}
+
+// RFC-compliant CSV line parser that respects quoted commas and escaped quotes
+function parseCsvLine(line) {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (char === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        current += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      result.push(current);
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  result.push(current);
+  return result;
 }
 
 // Initialize CSV files with headers if they don't exist
@@ -110,20 +139,24 @@ function logBookingToCsv(bookingData) {
 function getInquiriesFromCsv() {
   try {
     initCsvFiles();
+    if (!fs.existsSync(inquiriesCsvPath)) return [];
     const content = fs.readFileSync(inquiriesCsvPath, 'utf8');
-    const lines = content.trim().split('\n').slice(1);
-    return lines.map(line => {
-      const parts = line.split(',').map(p => p.replace(/^"|"$/g, '').replace(/""/g, '"'));
-      return {
-        timestamp: parts[0],
-        name: parts[1],
-        email: parts[2],
-        phone: parts[3],
-        subject: parts[4],
-        message: parts[5],
-        sourcePage: parts[6]
-      };
-    }).reverse();
+    const lines = content.trim().split(/\r?\n/).slice(1);
+    return lines
+      .filter(line => line.trim().length > 0)
+      .map(line => {
+        const parts = parseCsvLine(line);
+        return {
+          timestamp: parts[0] || '',
+          name: parts[1] || '',
+          email: parts[2] || '',
+          phone: parts[3] || '',
+          subject: parts[4] || '',
+          message: parts[5] || '',
+          sourcePage: parts[6] || ''
+        };
+      })
+      .reverse();
   } catch (err) {
     return [];
   }

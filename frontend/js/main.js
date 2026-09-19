@@ -433,6 +433,10 @@ function showStep(step) {
 }
 
 function setupGlobalModalFormHandlers() {
+  const form = document.getElementById('multiStepEnquiryForm');
+  if (!form || form.dataset.handlersAttached === 'true') return;
+  form.dataset.handlersAttached = 'true';
+
   const nextBtn = document.getElementById('modalNextBtn');
   const backBtn = document.getElementById('modalBackBtn');
 

@@ -102,6 +102,21 @@
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       const container = document.getElementById('packagesContainer');
+      const urlParams = new URLSearchParams(window.location.search);
+      const destFilter = urlParams.get('destination') || urlParams.get('search') || '';
+
+      if (destFilter && container) {
+        const filterNotice = document.createElement('div');
+        filterNotice.className = 'col-12 mb-3';
+        filterNotice.innerHTML = `
+          <div class="alert alert-dark d-flex align-items-center justify-content-between p-3 border border-warning">
+            <span><i class="fas fa-filter text-warning me-2"></i> Filtering by destination: <strong>${destFilter}</strong></span>
+            <a href="packages.html" class="btn btn-sm btn-outline-warning"><i class="fas fa-times me-1"></i> Clear Filter</a>
+          </div>
+        `;
+        container.parentElement.insertBefore(filterNotice, container);
+      }
+
       if (container) {
         container.innerHTML = `
           <div class="col-12 text-center text-muted py-5">
@@ -111,7 +126,9 @@
       }
 
       try {
-        const apiUrl = window.getApiUrl ? window.getApiUrl('/api/packages') : 'https://daffodil-himalayan-website.onrender.com/api/packages';
+        const queryStr = window.location.search || '';
+        const endpoint = `/api/packages${queryStr}`;
+        const apiUrl = window.getApiUrl ? window.getApiUrl(endpoint) : `https://daffodil-himalayan-website.onrender.com${endpoint}`;
         const res = await fetch(apiUrl);
         if (!res.ok) {
           throw new Error(`Server returned HTTP ${res.status}`);
@@ -120,6 +137,18 @@
         if (data.success && data.packages && data.packages.length > 0) {
           loadedPackages = data.packages;
           renderPackages(data.packages);
+        } else if (data.success && data.packages && data.packages.length === 0) {
+          loadedPackages = [];
+          if (container) {
+            container.innerHTML = `
+              <div class="col-12 text-center py-5">
+                <i class="fas fa-search text-warning fa-3x mb-3"></i>
+                <h4 class="font-serif">No Expeditions Matching "${destFilter}"</h4>
+                <p class="text-muted">We have custom private departures available for this destination.</p>
+                <a href="packages.html" class="btn btn-gold mt-2 px-4 me-2"><i class="fas fa-suitcase me-2"></i> View All Packages</a>
+                <a href="contact.html" class="btn btn-outline-dark mt-2 px-4"><i class="fas fa-envelope me-2"></i> Request Custom Plan</a>
+              </div>`;
+          }
         } else {
           throw new Error('No packages returned from server');
         }

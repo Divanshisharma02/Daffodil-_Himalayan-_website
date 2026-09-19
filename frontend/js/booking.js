@@ -99,7 +99,8 @@ async function handleBookingSubmit(e) {
   const hotelCategory = document.getElementById('hotelTierSelect').value;
   const mealPlan = document.getElementById('mealPlanSelect').value;
   const paymentMethod = 'Direct Agency Booking';
-  const couponCode = document.getElementById('couponInput').value;
+  const couponCode = document.getElementById('couponInput')?.value || '';
+  const pickupLocation = document.getElementById('pickupLocationInput')?.value || 'Airport / Main Railway Station Pickup';
 
   if (!customerName || !customerEmail || !travelDate) {
     alert('Please fill out all required fields');
@@ -109,17 +110,17 @@ async function handleBookingSubmit(e) {
   const payload = {
     customerName,
     customerEmail,
-    customerPhone,
-    packageId: currentPackageData._id,
-    packageName: currentPackageData.title,
+    customerPhone: customerPhone || '+91 98160 00000',
+    packageId: currentPackageData ? currentPackageData._id : 'pkg_custom',
+    packageName: currentPackageData ? currentPackageData.title : 'Custom Himalayan Tour',
     travelDate,
-    adults: Number(adults),
-    children: Number(children),
+    adults: Number(adults) || 1,
+    children: Number(children) || 0,
     hotelCategory,
     mealPlan,
     pickupLocation,
-    currency: window.DaffodilState.currency,
-    basePrice: currentPackageData.priceINR,
+    currency: (window.DaffodilState && window.DaffodilState.currency) || 'INR',
+    basePrice: currentPackageData ? currentPackageData.priceINR : 25000,
     couponCode,
     paymentMethod
   };

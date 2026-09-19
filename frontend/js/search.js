@@ -9,5 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.location.href = `packages.html?destination=${encodeURIComponent(destination)}&date=${travelDate}&travellers=${travellers}`;
     });
+
+    const heroDestInput = document.getElementById('heroDestInput');
+    heroDestInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        heroSearchBtn.click();
+      }
+    });
   }
 });

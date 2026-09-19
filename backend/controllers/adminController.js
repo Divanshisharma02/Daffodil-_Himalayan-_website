@@ -47,10 +47,11 @@ const updateBookingStatus = async (req, res) => {
     const { bookingStatus } = req.body;
 
     const booking = seedData.bookings.find(b => b.bookingId === bookingId);
-    if (booking) {
-      booking.bookingStatus = bookingStatus || booking.bookingStatus;
+    if (!booking) {
+      return res.status(404).json({ success: false, message: `Booking ID '${bookingId}' not found in registry.` });
     }
 
+    booking.bookingStatus = bookingStatus || booking.bookingStatus;
     res.json({ success: true, message: 'Booking status updated successfully', booking });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
