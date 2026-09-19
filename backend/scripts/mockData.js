@@ -524,6 +524,59 @@ const mockData = {
         { day: 4, title: "Dharamshala Local Tour & Naina Devi", description: "Visit Dharamshala McLeod Ganj, proceed to Naina Devi hill shrine.", icon: "fa-mountain", activityType: "Sightseeing" },
         { day: 5, title: "Una/Chandigarh Departure", description: "Return transfer to Una/Chandigarh for onward journey.", icon: "fa-plane-departure", activityType: "Departure" }
       ]
+    },
+    {
+      title: "Devbhoomi Mahatirth: 15 Sacred Temples of Himachal Yatra",
+      slug: "himachal-15-sacred-temples-yatra",
+      destination: "Himachal Pradesh",
+      country: "India",
+      durationDays: 9,
+      durationNights: 8,
+      priceINR: 24999,
+      priceUSD: 310,
+      discountPercentage: 15,
+      rating: 4.99,
+      reviewsCount: 165,
+      image: "images/himachal devi darshan.jpg",
+      overview: "The definitive holy pilgrimage covering all 15 legendary shrines of Himachal Pradesh: Jakhu Hanuman 108ft, Kali Bari, Tara Devi, Jatoli Shiva, Naina Devi, Chintpurni, Jwalamukhi, Bajreshwari, Chamunda Devi, Masroor Rock-cut, Hadimba Devi, Bijli Mahadev, Shikari Mata, Bhima Kali, and Chaurasi Temples.",
+      inclusions: ["Deluxe Hotel & Ashram Stays", "Private AC Chauffeur Vehicle", "VIP Temple Darshan & Ropeway Passes", "Sattvic Pure Vegetarian Meals", "Dedicated Devbhoomi Pilgrim Guide"],
+      exclusions: ["Pony/Horse personal hire", "Special Archana dakshina"],
+      badges: { isBestSeller: true, isFamilyFriendly: true, isAdventure: false, isLuxury: true, isTempleTour: true, isHeritage: true },
+      itinerary: [
+        { day: 1, title: "Shimla & Solan: Jatoli, Tara Devi & Kali Bari", description: "Visit Asia's tallest Shiva temple at Jatoli Solan, followed by Tara Devi hilltop shrine and historic Kali Bari Temple.", icon: "fa-place-of-worship", activityType: "Arrival" },
+        { day: 2, title: "Jakhu Hanuman 108-ft & Bushahr Bhima Kali Sarahan", description: "Early ropeway to Jakhu Hanuman 108-ft statue; scenic drive along Satluj river to historic Kath-Kuni Bhima Kali Temple in Sarahan.", icon: "fa-mountain", activityType: "Temple" },
+        { day: 3, title: "Mandi: High-Altitude Shikari Mata Roofless Shrine", description: "Ascend to 3,359m Shikari Devi sanctuary where snow miraculously never settles on the sacred idol.", icon: "fa-cloud-sun", activityType: "Temple" },
+        { day: 4, title: "Kullu & Manali: Bijli Mahadev & Hadimba Pagoda", description: "Darshan at lightning-staff Bijli Mahadev Shiva temple and ancient 1553 AD Hadimba Pagoda temple in Dhungri deodar forest.", icon: "fa-gopuram", activityType: "Temple" },
+        { day: 5, title: "Kangra: 8th Century Masroor Rock-cut Monolith & Chamunda", description: "Marvel at ancient rock-cut temple of Masroor and offer prayers at Chamunda Devi temple facing Dhauladhar snow peaks.", icon: "fa-landmark", activityType: "Temple" },
+        { day: 6, title: "Kangra Shaktipeeth: Jwalamukhi & Bajreshwari Devi", description: "Witness the eternal natural blue flame at Jwala Ji and visit historic Nagarkot Bajreshwari Devi Dham.", icon: "fa-fire", activityType: "Temple" },
+        { day: 7, title: "Una & Bilaspur: Chintpurni & Naina Devi Shaktipeeths", description: "Sacred darshan at Maa Chintpurni wishing shrine and cable car ascent to hilltop Naina Devi overlooking Gobind Sagar.", icon: "fa-water", activityType: "Temple" },
+        { day: 8, title: "Bharmour, Chamba: Ancient Chaurasi 84 Temples Complex", description: "Spiritual excursion to the sacred 7th-century Chaurasi temple complex of Lord Shiva and Lord Ganesha in Bharmour.", icon: "fa-monument", activityType: "Temple" },
+        { day: 9, title: "Chandigarh / Delhi Departure with Divine Blessings", description: "Return transfer to Chandigarh/Delhi with prasad, holy mementos, and lifelong spiritual blessings.", icon: "fa-plane-departure", activityType: "Departure" }
+      ]
+    },
+    {
+      title: "Shimla, Solan & Mandi Spiritual Trail",
+      slug: "shimla-solan-mandi-spiritual-trail",
+      destination: "Shimla, Solan & Mandi",
+      country: "India",
+      durationDays: 4,
+      durationNights: 3,
+      priceINR: 11999,
+      priceUSD: 150,
+      discountPercentage: 10,
+      rating: 4.93,
+      reviewsCount: 88,
+      image: "images/himachal.jpg",
+      overview: "A serene 4-day spiritual escape through Shimla's divine ridge temples (Jakhu 108ft, Kali Bari, Tara Devi), Solan's towering Jatoli Shiv Mandir, and Mandi's Shikari Devi high sanctuary.",
+      inclusions: ["3-Star Mountain View Resorts", "Private Vehicle transfers", "Daily Breakfast & Dinner", "Jakhu Ropeway Passes", "VIP Entry"],
+      exclusions: ["Personal Laundry", "Extra baggage transfer"],
+      badges: { isBestSeller: false, isFamilyFriendly: true, isAdventure: false, isLuxury: false, isTempleTour: true, isHeritage: true },
+      itinerary: [
+        { day: 1, title: "Kalka/Chandigarh to Solan: Jatoli Shiv Mandir", description: "Pickup and visit Asia's tallest Shiva shrine with musical stones in Jatoli Solan.", icon: "fa-place-of-worship", activityType: "Arrival" },
+        { day: 2, title: "Shimla: Jakhu 108-ft, Kali Bari & Tara Devi", description: "Morning Jakhu ropeway darshan, heritage walk to Kali Bari, and sunset prayers at Tara Devi.", icon: "fa-gopuram", activityType: "Temple" },
+        { day: 3, title: "Mandi: Shikari Mata Peak Sanctuary", description: "Excursion to Mandi's highest peak temple dedicated to Shikari Mata with 360° Himalayan views.", icon: "fa-mountain", activityType: "Temple" },
+        { day: 4, title: "Chandigarh Departure", description: "Descent to Chandigarh for departure with divine peace and joy.", icon: "fa-plane-departure", activityType: "Departure" }
+      ]
     }
   ],
   hotels: [

@@ -3,12 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sacred Temple Tours & Char Dham | Daffodil Himalayan</title>
+  <title>15 Sacred Temples of Himachal Pradesh & Devbhoomi Yatras | Daffodil Himalayan</title>
+  <meta name="description" content="Explore the 15 most sacred temples of Himachal Pradesh including Jakhu Hanuman, Naina Devi, Chintpurni, Jwalamukhi, Hadimba, Bijli Mahadev, and Jatoli Shiv Mandir with Daffodil Himalayan.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
+  <style>
+    .temple-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffffff;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .temple-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(11, 61, 46, 0.15);
+      border-color: #d4af37;
+    }
+    .temple-img-wrap {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      background: #0b1f3a;
+    }
+    .temple-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .temple-card:hover .temple-img-wrap img {
+      transform: scale(1.08);
+    }
+    .temple-badge-loc {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(11, 61, 46, 0.92);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+    .temple-known-for {
+      background: #fbf9f5;
+      border-left: 4px solid #d4af37;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+    .filter-tab-btn {
+      border: 1px solid #d4af37;
+      background: #ffffff;
+      color: #0b3d2e;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 30px;
+      transition: all 0.25s ease;
+      font-size: 0.88rem;
+    }
+    .filter-tab-btn.active, .filter-tab-btn:hover {
+      background: #0b3d2e;
+      color: #ffd700;
+      border-color: #0b3d2e;
+    }
+    .temple-table th {
+      background-color: #0b1f3a;
+      color: #ffd700;
+      font-family: 'Georgia', serif;
+      font-weight: 600;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-light">
 
   <!-- TOP HEADER NOTICE BANNER -->
   <div class="bg-dark text-white py-1 px-3" style="font-size: 0.78rem; border-bottom: 1px solid rgba(212,175,55,0.3);">
@@ -24,7 +99,7 @@
     </div>
   </div>
 
-  <!-- PERMANENT STABLE NAVBAR (CONTAINER-FLUID PX-4) -->
+  <!-- PERMANENT NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark luxury-nav sticky-top py-2">
     <div class="container-fluid px-4">
       <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" title="Go to Home Page">
@@ -51,90 +126,612 @@
           <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i>Contact</a></li>
         </ul>
         <div class="nav-action-wrapper" id="authNavContainer">
-          <select id="currencySelector" class="currency-selector"><option value="INR">₹ INR</option><option value="USD">$ USD</option></select>
-          </div>
+          <select id="currencySelector" class="currency-selector" title="Select Currency">
+            <option value="INR">₹ INR</option>
+            <option value="USD">$ USD</option>
+          </select>
+        </div>
       </div>
     </div>
   </nav>
 
-  <section class="py-5 text-white text-center" style="background: url('images/templebackground.jpg') center center / cover no-repeat;">
-    <div class="py-4 bg-dark bg-opacity-75">
+  <!-- HERO BANNER -->
+  <section class="py-5 text-white text-center position-relative" style="background: linear-gradient(rgba(11,31,58,0.78), rgba(11,61,46,0.85)), url('images/templebackground.jpg') center center / cover no-repeat;">
+    <div class="py-4">
       <div class="container">
-        <span class="section-tag text-warning">Devbhoomi Pilgrimage</span>
-        <h1 class="font-serif display-4 text-white">Sacred Temple Yatras & Helicopter Charters</h1>
-        <p class="lead text-light">Kedarnath Dham VIP Darshan, Badrinath, Varanasi Ganga Aarti, & Golden Temple</p>
+        <span class="badge bg-gold text-dark px-3 py-2 text-uppercase fw-bold mb-3"><i class="fas fa-om me-1"></i> Devbhoomi Sacred Pilgrimages</span>
+        <h1 class="font-serif display-4 text-white fw-bold mb-3">15 Sacred Temples of Himachal Pradesh</h1>
+        <p class="lead text-light max-w-700 mx-auto" style="max-width: 800px;">
+          Explore the divine grace of ancient Shaktipeeths, Asia's tallest Shiva sanctum, hilltop temples, and historic pagoda-style shrines across Devbhoomi Himachal with priority VIP Darshan assistance.
+        </p>
+        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+          <a href="#templesDirectory" class="btn btn-gold px-4 py-2 fw-bold text-uppercase"><i class="fas fa-gopuram me-2"></i> Explore 15 Temples</a>
+          <a href="#curatedYatras" class="btn btn-outline-light px-4 py-2 fw-bold text-uppercase"><i class="fas fa-route me-2"></i> View Yatra Packages</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section-padding">
+  <!-- SECTION: 15 SACRED TEMPLES DIRECTORY -->
+  <section class="section-padding" id="templesDirectory">
     <div class="container">
+      
+      <div class="text-center mb-5">
+        <span class="section-tag text-success">Divine Sanctuaries</span>
+        <h2 class="font-serif display-5 text-dark fw-bold">The 15 Holy Shrines of Himachal Pradesh</h2>
+        <p class="text-muted mx-auto" style="max-width: 700px;">
+          Filter by district or search your desired deity. Each shrine is served by Daffodil Himalayan private vehicle transfers and VIP Darshan coordination.
+        </p>
+      </div>
+
+      <!-- SEARCH & REGION FILTERS -->
+      <div class="row g-3 justify-content-center mb-4">
+        <div class="col-md-6 col-lg-5">
+          <div class="input-group shadow-sm">
+            <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-success"></i></span>
+            <input type="text" id="templeSearchInput" class="form-control border-start-0 ps-0" placeholder="Search by temple name, deity, or region...">
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTER TABS -->
+      <div class="d-flex justify-content-center gap-2 flex-wrap mb-5" id="templeFilterTabs">
+        <button class="filter-tab-btn active" data-filter="all">All Temples (15)</button>
+        <button class="filter-tab-btn" data-filter="shimla-solan">Shimla & Solan</button>
+        <button class="filter-tab-btn" data-filter="kangra-una">Kangra & Una</button>
+        <button class="filter-tab-btn" data-filter="kullu-manali">Kullu & Manali</button>
+        <button class="filter-tab-btn" data-filter="sarahan-mandi">Sarahan & Mandi</button>
+        <button class="filter-tab-btn" data-filter="bilaspur-chamba">Bilaspur & Chamba</button>
+      </div>
+
+      <!-- TEMPLES GRID -->
+      <div class="row g-4" id="templesGrid">
+        <!-- 15 Temples dynamically rendered via JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPLETE REFERENCE DIRECTORY TABLE -->
+  <section class="py-5 bg-white border-top border-bottom">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="section-tag text-success">Quick Pilgrimage Guide</span>
+        <h3 class="font-serif text-dark fw-bold">Himachal Temples At a Glance</h3>
+        <p class="small text-muted">Complete overview of sacred locations and key spiritual attributes</p>
+      </div>
+
+      <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover table-striped align-middle temple-table mb-0">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 5%;">#</th>
+              <th scope="col" style="width: 25%;">Temple Name</th>
+              <th scope="col" style="width: 15%;">Location</th>
+              <th scope="col" style="width: 35%;">Known For & Sacred Significance</th>
+              <th scope="col" style="width: 20%;" class="text-end">Pilgrimage Action</th>
+            </tr>
+          </thead>
+          <tbody id="templeTableBody">
+            <!-- Table rows populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: CURATED YATRA PACKAGES -->
+  <section class="section-padding bg-light" id="curatedYatras">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-tag text-success">Pilgrimage Packages</span>
+        <h2 class="font-serif display-5 text-dark fw-bold">Curated Sacred Temple Yatras</h2>
+        <p class="text-muted">All packages include deluxe transport, VIP Pooja coordination, and pure vegetarian cuisine.</p>
+      </div>
+
       <div class="row g-4">
+        <!-- Package 1: 15 Temples Mahatirth -->
         <div class="col-lg-4 col-md-6">
-          <div class="luxury-card">
-            <div class="card-img-wrapper">
-              <img src="images/kedarnath&badrinath.jpg" alt="Kedarnath Dham">
+          <div class="luxury-card h-100">
+            <div class="card-img-wrapper" style="height: 220px;">
+              <img src="images/himachal devi darshan.jpg" alt="15 Sacred Temples Mahatirth">
+              <div class="card-badge-container">
+                <span class="badge bg-gold text-dark fw-bold">Grand Mahatirth</span>
+                <span class="badge bg-dark text-warning">9 Days / 8 Nights</span>
+              </div>
             </div>
-            <div class="card-body-content">
-              <h3 class="card-title font-serif">Sacred Char Dham & Kedarnath Yatra</h3>
-              <p class="small text-muted">VIP helicopter slots, priority Darshan pass, and luxury lodge stay in Phata/Guptkashi.</p>
+            <div class="card-body-content d-flex flex-column justify-content-between p-4">
+              <div>
+                <h3 class="card-title font-serif h5 text-success">Devbhoomi Mahatirth: 15 Sacred Temples Yatra</h3>
+                <p class="small text-muted mb-3">The definitive spiritual yatra covering all 15 shrines: Jakhu Hanuman 108ft, Naina Devi, Chintpurni, Jwalamukhi, Bajreshwari, Chamunda, Hadimba, Bijli Mahadev, Jatoli, and Shikari Mata.</p>
+                <ul class="small text-muted list-unstyled mb-3">
+                  <li><i class="fas fa-check text-success me-1"></i> VIP Darshan at all Shaktipeeths</li>
+                  <li><i class="fas fa-check text-success me-1"></i> Private Chauffeur Vehicle</li>
+                  <li><i class="fas fa-check text-success me-1"></i> Pure Sattvic Vegetarian Meals</li>
+                </ul>
+              </div>
               <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-                <span class="price-tag">₹21,999</span>
-                <a href="booking.html?package=sacred-kedarnath-badrinath-pilgrimage" class="btn btn-sm btn-gold">Book Yatra</a>
+                <div>
+                  <small class="text-muted d-block">Starting from</small>
+                  <strong class="price-tag fs-5 text-success">₹24,999</strong>
+                </div>
+                <a href="booking.html?package=himachal-15-sacred-temples-yatra" class="btn btn-gold btn-sm px-3 fw-bold">Book Yatra</a>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Package 2: 5 Devi Shaktipeeths -->
         <div class="col-lg-4 col-md-6">
-          <div class="luxury-card">
-            <div class="card-img-wrapper">
-              <img src="images/ayodhya.jpg" alt="Varanasi Ayodhya">
+          <div class="luxury-card h-100">
+            <div class="card-img-wrapper" style="height: 220px;">
+              <img src="https://images.unsplash.com/photo-1596405835955-e61df891b4ae?auto=format&fit=crop&w=800&q=80" alt="Himachal Devi Darshan">
+              <div class="card-badge-container">
+                <span class="badge bg-danger text-white fw-bold">5 Shaktipeeths</span>
+                <span class="badge bg-dark text-warning">5 Days / 4 Nights</span>
+              </div>
             </div>
-            <div class="card-body-content">
-              <h3 class="card-title font-serif">Varanasi Ganga Aarti & Ayodhya Ram Mandir</h3>
-              <p class="small text-muted">Private boat for Ganga Aarti, Kashi Vishwanath VIP pass, and Ayodhya Mandir darshan.</p>
+            <div class="card-body-content d-flex flex-column justify-content-between p-4">
+              <div>
+                <h3 class="card-title font-serif h5 text-success">Himachal Sacred Devi Darshan Yatra</h3>
+                <p class="small text-muted mb-3">Holy pilgrimage covering Chintpurni, Jwala Ji (natural eternal flame), Kangra Bajreshwari, Chamunda Devi, and hilltop Naina Devi.</p>
+                <ul class="small text-muted list-unstyled mb-3">
+                  <li><i class="fas fa-check text-success me-1"></i> Priority Ropeway to Naina Devi</li>
+                  <li><i class="fas fa-check text-success me-1"></i> Special Aarti Assistance</li>
+                  <li><i class="fas fa-check text-success me-1"></i> 4-Star Mountain Resorts</li>
+                </ul>
+              </div>
               <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-                <span class="price-tag">₹28,000</span>
-                <a href="booking.html" class="btn btn-sm btn-gold">Book Yatra</a>
+                <div>
+                  <small class="text-muted d-block">Starting from</small>
+                  <strong class="price-tag fs-5 text-success">₹14,999</strong>
+                </div>
+                <a href="booking.html?package=devi-darshan-yatra" class="btn btn-gold btn-sm px-3 fw-bold">Book Yatra</a>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Package 3: Shimla, Solan & Mandi Spiritual Trail -->
         <div class="col-lg-4 col-md-6">
-          <div class="luxury-card">
-            <div class="card-img-wrapper">
-              <img src="images/veshnodevi.jpg" alt="Golden Temple Vaishno Devi">
-            </div>
-            <div class="card-body-content">
-              <h3 class="card-title font-serif">Golden Temple Amritsar & Vaishno Devi</h3>
-              <p class="small text-muted">Sacred Harmandir Sahib Amritsar, Wagah Border, and Katra Mata Vaishno Devi shrine trek.</p>
-              <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-                <span class="price-tag">₹32,500</span>
-                <a href="booking.html" class="btn btn-sm btn-gold">Book Yatra</a>
+          <div class="luxury-card h-100">
+            <div class="card-img-wrapper" style="height: 220px;">
+              <img src="https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80" alt="Shimla Solan Spiritual Trail">
+              <div class="card-badge-container">
+                <span class="badge bg-success text-white fw-bold">Shiva & Hanuman</span>
+                <span class="badge bg-dark text-warning">4 Days / 3 Nights</span>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="luxury-card">
-            <div class="card-img-wrapper">
-              <img src="images/himachal devi darshan.jpg" alt="Himachal Temples">
-            </div>
-            <div class="card-body-content">
-              <h3 class="card-title font-serif">Himachal Sacred Devi & Lake Temples Yatra</h3>
-              <p class="small text-muted">Holy pilgrimage tour of Rewalsar Lake, Prashar Lake, Kamrunag, Mahunag, Shikari Devi, Tarna Devi temple, and Mamleshwar temple.</p>
+            <div class="card-body-content d-flex flex-column justify-content-between p-4">
+              <div>
+                <h3 class="card-title font-serif h5 text-success">Shimla, Solan & Mandi Spiritual Trail</h3>
+                <p class="small text-muted mb-3">Jakhu Hanuman 108ft statue, historic Kali Bari, Tara Devi panoramic shrine, Jatoli Shiv Mandir (tallest in Asia), and Shikari Mata high peak.</p>
+                <ul class="small text-muted list-unstyled mb-3">
+                  <li><i class="fas fa-check text-success me-1"></i> Jakhu Ropeway Cable Car included</li>
+                  <li><i class="fas fa-check text-success me-1"></i> Solan Musical Stone Temple Tour</li>
+                  <li><i class="fas fa-check text-success me-1"></i> Scenic Shimla Pine Lodge Stays</li>
+                </ul>
+              </div>
               <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-                <span class="price-tag">₹14,999</span>
-                <a href="booking.html?package=devi-darshan-yatra" class="btn btn-sm btn-gold">Book Yatra</a>
+                <div>
+                  <small class="text-muted d-block">Starting from</small>
+                  <strong class="price-tag fs-5 text-success">₹11,999</strong>
+                </div>
+                <a href="booking.html?package=shimla-solan-mandi-spiritual-trail" class="btn btn-gold btn-sm px-3 fw-bold">Book Yatra</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
+
+  <!-- SPECIAL AMENITIES BANNER -->
+  <section class="py-5 bg-dark text-white border-top border-warning">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <div class="col-md-3 col-6">
+          <i class="fas fa-user-shield fa-2x text-warning mb-2"></i>
+          <h6 class="fw-bold">Govt Registered Desk</h6>
+          <small class="text-light opacity-75">Reg: 11-2279/2024-DTO-SML</small>
+        </div>
+        <div class="col-md-3 col-6">
+          <i class="fas fa-wheelchair fa-2x text-warning mb-2"></i>
+          <h6 class="fw-bold">Senior Citizen Care</h6>
+          <small class="text-light opacity-75">VIP passes & pony/ropeway coordination</small>
+        </div>
+        <div class="col-md-3 col-6">
+          <i class="fas fa-utensils fa-2x text-warning mb-2"></i>
+          <h6 class="fw-bold">Pure Sattvic Dining</h6>
+          <small class="text-light opacity-75">Fresh vegetarian pilgrim meals</small>
+        </div>
+        <div class="col-md-3 col-6">
+          <i class="fab fa-whatsapp fa-2x text-success mb-2"></i>
+          <h6 class="fw-bold">WhatsApp Desk</h6>
+          <small class="text-light opacity-75">+91 8219527240 (24x7)</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <h4 class="font-serif text-warning">DAFFODIL HIMALAYAN</h4>
+          <p class="small text-light opacity-75">
+            Government Registered Tour & Travel Agency dedicated to bespoke Himalayan expeditions, sacred Devbhoomi pilgrimages, and luxury sanctuary holidays.
+          </p>
+          <span class="badge bg-warning text-dark fw-bold">Govt Reg: 11-2279/2024-DTO-SML</span>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h6 class="text-warning">Navigation</h6>
+          <ul class="list-unstyled small">
+            <li><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+            <li><a href="destinations.html" class="text-light text-decoration-none">Destinations</a></li>
+            <li><a href="packages.html" class="text-light text-decoration-none">Tour Packages</a></li>
+            <li><a href="temple-tours.html" class="text-light text-decoration-none">Temple Tours</a></li>
+            <li><a href="hotels.html" class="text-light text-decoration-none">Hotels</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-6">
+          <h6 class="text-warning">Temple Circuits</h6>
+          <ul class="list-unstyled small">
+            <li><a href="temple-tours.html" class="text-light text-decoration-none">15 Sacred Temples</a></li>
+            <li><a href="temple-tours.html" class="text-light text-decoration-none">Kangra 5 Shaktipeeths</a></li>
+            <li><a href="temple-tours.html" class="text-light text-decoration-none">Jakhu & Tara Devi Shimla</a></li>
+            <li><a href="temple-tours.html" class="text-light text-decoration-none">Jatoli Tallest Shiva Temple</a></li>
+            <li><a href="temple-tours.html" class="text-light text-decoration-none">Hadimba & Bijli Mahadev</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3">
+          <h6 class="text-warning">Headquarters Desk</h6>
+          <p class="small text-light mb-1"><i class="fas fa-map-marker-alt text-warning me-2"></i> Shimla, Himachal Pradesh</p>
+          <p class="small text-light mb-1"><i class="fas fa-phone-alt text-warning me-2"></i> +91 8219527240</p>
+          <p class="small text-light"><i class="fas fa-envelope text-warning me-2"></i> daffodilhimalayan@gmail.com</p>
+          <a href="https://wa.me/918219527240" target="_blank" class="btn btn-sm btn-outline-warning mt-1"><i class="fab fa-whatsapp me-1"></i> Chat on WhatsApp</a>
+        </div>
+      </div>
+      <div class="text-center pt-3 border-top border-secondary small text-light opacity-50">
+        &copy; 2026 DAFFODIL HIMALAYAN. All rights reserved. Govt Reg No: 11-2279/2024-DTO-SML.
+      </div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    // 15 SACRED TEMPLES OF HIMACHAL PRADESH DATA
+    const himachalTemples = [
+      {
+        id: "jakhu-hanuman",
+        name: "Shri Hanuman Mandir, Jakhu",
+        location: "Shimla",
+        region: "shimla-solan",
+        altitude: "2,455 m (8,054 ft)",
+        knownFor: "Lord Hanuman, huge 108-ft statue",
+        image: "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80",
+        description: "Situated on Jakhu Hill, the highest peak of Shimla. Houses the world's most famous 108-foot colossal statue of Lord Hanuman, visible across Shimla. Features modern ropeway cable car access.",
+        deity: "Lord Hanuman"
+      },
+      {
+        id: "kali-bari",
+        name: "Kali Bari Temple",
+        location: "Shimla",
+        region: "shimla-solan",
+        altitude: "2,205 m (Near Mall Road)",
+        knownFor: "Goddess Kali, near Mall Road",
+        image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80",
+        description: "Historic 1845 shrine dedicated to Goddess Shyamala (manifestation of Kali), from whom the city of Shimla derives its name. Located just a short stroll from The Ridge and Mall Road.",
+        deity: "Goddess Kali (Shyamala Devi)"
+      },
+      {
+        id: "tara-devi",
+        name: "Tara Devi Temple",
+        location: "Shimla",
+        region: "shimla-solan",
+        altitude: "2,195 m (7,200 ft)",
+        knownFor: "Hilltop temple & panoramic views",
+        image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        description: "Perched majestically atop Taraav Parvat amid thick pine, deodar, and oak forests. Over 250 years old, this sanctum offers spellbinding 360-degree views of snow-capped Himalayan ranges.",
+        deity: "Goddess Tara (Durga)"
+      },
+      {
+        id: "bhima-kali",
+        name: "Shri Bhima Kali Ji Temple",
+        location: "Sarahan",
+        region: "sarahan-mandi",
+        altitude: "2,150 m (Bushahr Valley)",
+        knownFor: "Goddess Bhimakali, traditional architecture",
+        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+        description: "A monumental 800-year-old masterpiece of Himalayan Kath-Kuni (interlocked timber and stone) architecture. One of the sacred 51 Shaktipeeths and ancient presiding royal deity of Bushahr kingdom.",
+        deity: "Goddess Bhimakali"
+      },
+      {
+        id: "naina-devi",
+        name: "Shri Mata Naina Devi Ji Shaktipeeth",
+        location: "Bilaspur",
+        region: "bilaspur-chamba",
+        altitude: "1,219 m (Triangular Hill)",
+        knownFor: "Shaktipeeth (Eyes of Sati)",
+        image: "https://images.unsplash.com/photo-1609766857328-98e3b3c3734e?auto=format&fit=crop&w=800&q=80",
+        description: "Major Shaktipeeth where Goddess Sati's eyes (Naina) fell. Perched on a cliff overlooking the emerald waters of Gobind Sagar Lake. Modern passenger ropeway and grand Navratri festivals.",
+        deity: "Maa Naina Devi"
+      },
+      {
+        id: "chintpurni",
+        name: "Shri Mata Chintpurni Ji Temple",
+        location: "Una",
+        region: "kangra-una",
+        altitude: "977 m (Sola Singhi Range)",
+        knownFor: "Shaktipeeth (Maa Chhinnmastika)",
+        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80",
+        description: "Sacred shrine of Maa Chhinnmastika, celebrated for fulfilling wishes and removing all worries (Chinta). Pilgrims tie sacred mauli threads to the holy banyan tree within the sanctum.",
+        deity: "Maa Chhinnmastika Devi"
+      },
+      {
+        id: "jwalamukhi",
+        name: "Shri Jwalamukhi Mata Shaktipeeth",
+        location: "Kangra",
+        region: "kangra-una",
+        altitude: "610 m (Kalidhar Hills)",
+        knownFor: "Eternal natural flame",
+        image: "https://images.unsplash.com/photo-1596405835955-e61df891b4ae?auto=format&fit=crop&w=800&q=80",
+        description: "Renowned worldwide where Goddess Sati's tongue fell. There is no idol; nine eternal natural blue flames (Jyoti) burst continuously from rock fissures without fuel, worshipped for thousands of years.",
+        deity: "Maa Jwala Ji (Sacred Flames)"
+      },
+      {
+        id: "bajreshwari-devi",
+        name: "Bajreshwari Devi Temple",
+        location: "Kangra",
+        region: "kangra-una",
+        altitude: "733 m (Nagarkot Dham)",
+        knownFor: "Ancient Devi temple (Left Breast of Sati)",
+        image: "https://images.unsplash.com/photo-1605371924599-2d0365da1ae0?auto=format&fit=crop&w=800&q=80",
+        description: "Famous as Nagarkot Dham, one of the most prosperous and ancient Devi shrines in Indian history. Revered for its gilded silver sanctum and Makar Sankranti butter-anointing traditions.",
+        deity: "Maa Vajreshwari (Durga)"
+      },
+      {
+        id: "chamunda-devi",
+        name: "Chamunda Devi Temple",
+        location: "Kangra",
+        region: "kangra-una",
+        altitude: "1,000 m (Banks of Baner River)",
+        knownFor: "Chamunda Devi & Dhauladhar views",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        description: "Located picturesquely on the rushing Baner riverbanks directly facing the snow-capped Dhauladhar massif. Celebrates the goddess who slayed the demon generals Chanda and Munda.",
+        deity: "Maa Chamunda"
+      },
+      {
+        id: "masroor-rock-cut",
+        name: "Masroor Rock-cut Temple",
+        location: "Kangra",
+        region: "kangra-una",
+        altitude: "762 m (Beas Sub-valley)",
+        knownFor: "Ancient rock-cut temple complex",
+        image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80",
+        description: "Hailed as the 'Ellora of the Himalayas', this rare 8th-century monolithic rock-cut sandstone complex features 15 shrines carved from a single natural hill facing a sacred reflective water pool.",
+        deity: "Lord Shiva, Rama, Lakshmana & Sita"
+      },
+      {
+        id: "hadimba-devi",
+        name: "Hadimba Devi Temple",
+        location: "Manali",
+        region: "kullu-manali",
+        altitude: "2,050 m (Dhungri Forest)",
+        knownFor: "Historic wooden/pagoda-style temple",
+        image: "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=800&q=80",
+        description: "Built in 1553 AD by Maharaja Bahadur Singh amid soaring deodar forests. Its exquisite 4-tiered pagoda wooden roof, intricate animal horn carvings, and brass sanctum make it an architectural icon.",
+        deity: "Hadimba Devi (Mahabharata)"
+      },
+      {
+        id: "bijli-mahadev",
+        name: "Bijli Mahadev Temple",
+        location: "Kullu",
+        region: "kullu-manali",
+        altitude: "2,460 m (Kashawari Hill)",
+        knownFor: "Shiva temple on a mountain (Lightning Staff)",
+        image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
+        description: "Features a 60-foot sacred staff that attracts divine lightning strikes periodically. The Shiva Lingam shatters to absorb cosmic energy and is lovingly restored by priests using clarified butter (makhan).",
+        deity: "Lord Shiva"
+      },
+      {
+        id: "chaurasi-temples",
+        name: "Chaurasi Temples",
+        location: "Bharmour, Chamba",
+        region: "bilaspur-chamba",
+        altitude: "2,195 m (Budhil Valley)",
+        knownFor: "Historic temple complex (84 Shrines)",
+        image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+        description: "Dating back to the 7th century in the ancient capital of Chamba. Complex of 84 stone shrines centered around Manimahesh Shiva and Dharamraj sanctums; official gateway to Manimahesh Yatra.",
+        deity: "Lord Shiva (Manimahesh) & Ganesha"
+      },
+      {
+        id: "jatoli-shiv",
+        name: "Jatoli Shiv Mandir",
+        location: "Solan",
+        region: "shimla-solan",
+        altitude: "1,500 m (Rajgarh Road)",
+        knownFor: "Shiva temple (Tallest in Asia - 111 ft)",
+        image: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+        description: "Renowned as the tallest Shiva temple in Asia with a 111-foot spire. Marvel of Dravidian-Himalayan stonework; the stones of the temple surprisingly emit sweet musical damru sounds when gently tapped.",
+        deity: "Lord Shiva"
+      },
+      {
+        id: "shikari-mata",
+        name: "Shikari Mata Mandir",
+        location: "Mandi",
+        region: "sarahan-mandi",
+        altitude: "3,359 m (11,020 ft - Highest Peak)",
+        knownFor: "High-altitude temple (Roofless Sanctuary)",
+        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+        description: "Crowning the highest summit in Mandi district. A unique ancient stone shrine completely open to the sky; according to legend and local observation, snow miraculously never accumulates on the idol.",
+        deity: "Maa Shikari Devi"
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTemplesGrid(himachalTemples);
+      renderTemplesTable(himachalTemples);
+      initFilterTabs();
+      initSearch();
+    });
+
+    function renderTemplesGrid(temples) {
+      const container = document.getElementById('templesGrid');
+      if (!container) return;
+
+      if (temples.length === 0) {
+        container.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <i class="fas fa-place-of-worship fa-3x text-warning mb-3"></i>
+            <h4 class="font-serif">No temples match your search</h4>
+            <p class="text-muted">Try clearing your search query or selecting "All Temples".</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = temples.map(t => `
+        <div class="col-lg-4 col-md-6 temple-item" data-region="${t.region}">
+          <div class="temple-card">
+            <div class="temple-img-wrap">
+              <img src="${t.image}" alt="${t.name}" onerror="this.src='images/himachal devi darshan.jpg'">
+              <span class="temple-badge-loc"><i class="fas fa-map-marker-alt text-warning me-1"></i> ${t.location}</span>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+              <div>
+                <h4 class="font-serif h5 text-dark fw-bold mb-2">${t.name}</h4>
+                <div class="temple-known-for text-dark">
+                  <i class="fas fa-star text-warning me-1"></i> <strong>Known for:</strong> ${t.knownFor}
+                </div>
+                <p class="small text-muted mb-3" style="line-height: 1.55;">
+                  ${t.description}
+                </p>
+              </div>
+              <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+                <span class="small text-muted"><i class="fas fa-mountain me-1 text-success"></i> ${t.altitude}</span>
+                <button type="button" class="btn btn-gold btn-sm fw-bold px-3 plan-darshan-btn" data-temple="${t.name}">
+                  <i class="fas fa-praying-hands me-1"></i> Plan Darshan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Bind click handlers to Plan Darshan buttons
+      document.querySelectorAll('.plan-darshan-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const templeName = e.currentTarget.getAttribute('data-temple');
+          openDarshanModal(templeName);
+        });
+      });
+    }
+
+    function renderTemplesTable(temples) {
+      const tbody = document.getElementById('templeTableBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = temples.map((t, idx) => `
+        <tr>
+          <td class="fw-bold text-muted">${idx + 1}</td>
+          <td>
+            <strong class="text-success">${t.name}</strong><br>
+            <small class="text-muted"><i class="fas fa-mountain me-1"></i> ${t.altitude}</small>
+          </td>
+          <td><span class="badge bg-light text-dark border"><i class="fas fa-map-pin text-danger me-1"></i> ${t.location}</span></td>
+          <td>
+            <span class="fw-semibold text-dark">${t.knownFor}</span><br>
+            <small class="text-muted">${t.deity}</small>
+          </td>
+          <td class="text-end">
+            <button type="button" class="btn btn-outline-dark btn-sm fw-bold plan-darshan-btn" data-temple="${t.name}">
+              <i class="fas fa-calendar-check text-warning me-1"></i> Enquire
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      tbody.querySelectorAll('.plan-darshan-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const templeName = e.currentTarget.getAttribute('data-temple');
+          openDarshanModal(templeName);
+        });
+      });
+    }
+
+    function initFilterTabs() {
+      const tabs = document.querySelectorAll('#templeFilterTabs .filter-tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          const filter = tab.getAttribute('data-filter');
+          const searchVal = document.getElementById('templeSearchInput')?.value.trim().toLowerCase() || '';
+
+          filterAndDisplay(filter, searchVal);
+        });
+      });
+    }
+
+    function initSearch() {
+      const searchInput = document.getElementById('templeSearchInput');
+      searchInput?.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        const activeTab = document.querySelector('#templeFilterTabs .filter-tab-btn.active');
+        const activeFilter = activeTab ? activeTab.getAttribute('data-filter') : 'all';
+
+        filterAndDisplay(activeFilter, query);
+      });
+    }
+
+    function filterAndDisplay(filter, query) {
+      let list = himachalTemples;
+
+      if (filter && filter !== 'all') {
+        list = list.filter(t => t.region === filter);
+      }
+
+      if (query) {
+        list = list.filter(t => 
+          t.name.toLowerCase().includes(query) ||
+          t.location.toLowerCase().includes(query) ||
+          t.knownFor.toLowerCase().includes(query) ||
+          t.deity.toLowerCase().includes(query) ||
+          t.description.toLowerCase().includes(query)
+        );
+      }
+
+      renderTemplesGrid(list);
+    }
+
+    function openDarshanModal(templeName) {
+      const destInput = document.getElementById('modalDestination');
+      if (destInput) {
+        destInput.value = `Darshan Yatra: ${templeName}`;
+      }
+      const descInput = document.getElementById('modalDescription');
+      if (descInput) {
+        descInput.value = `VIP Darshan, private vehicle transfers, and hotel/ashram accommodation requested for ${templeName}.`;
+      }
+      const msgInput = document.getElementById('modalMessage');
+      if (msgInput && !msgInput.value) {
+        msgInput.value = `Enquiring for pilgrimage packages including ${templeName}.`;
+      }
+      const modalTitle = document.getElementById('bookNowModalLabel');
+      if (modalTitle) {
+        modalTitle.innerHTML = `<i class="fas fa-place-of-worship me-2 text-warning"></i> Darshan Enquiry: ${templeName}`;
+      }
+      const modalEl = document.getElementById('bookNowModal');
+      if (modalEl && window.bootstrap) {
+        const bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        bsModal.show();
+      }
+    }
+  </script>
 </body>
 </html>
