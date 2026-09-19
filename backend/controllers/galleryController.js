@@ -105,7 +105,7 @@ const uploadGalleryPhoto = async (req, res) => {
       const filePath = path.join(uploadsDir, filename);
       await fs.promises.writeFile(filePath, imageBuffer);
 
-      const host = req.get('host') || 'daffodil-himalayan-website.onrender.com';
+      const host = req.get('host') || 'localhost:5000';
       const protocol = req.protocol === 'https' || req.get('x-forwarded-proto') === 'https' ? 'https' : 'http';
       imageUrl = `${protocol}://${host}/uploads/${filename}`;
     } catch (writeErr) {

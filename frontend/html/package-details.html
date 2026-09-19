@@ -122,7 +122,7 @@
       const slug = urlParams.get('slug') || 'royal-kashmir-luxury-expedition';
 
       try {
-        const apiUrl = window.getApiUrl ? window.getApiUrl(`/api/packages/${slug}`) : `https://daffodil-himalayan-website.onrender.com/api/packages/${slug}`;
+        const apiUrl = window.getApiUrl ? window.getApiUrl(`/api/packages/${slug}`) : `/api/packages/${slug}`;
         const res = await fetch(apiUrl);
         if (!res.ok) {
           throw new Error(`Server returned HTTP ${res.status}`);

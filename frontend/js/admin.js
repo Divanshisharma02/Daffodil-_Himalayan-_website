@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchAdminStats() {
   try {
-    const apiUrl = window.getApiUrl ? window.getApiUrl('/api/admin/stats') : 'https://daffodil-himalayan-website.onrender.com/api/admin/stats';
+    const apiUrl = window.getApiUrl ? window.getApiUrl('/api/admin/stats') : '/api/admin/stats';
     const res = await fetch(apiUrl);
     if (!res.ok) {
       throw new Error(`Server returned HTTP ${res.status}`);

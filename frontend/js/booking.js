@@ -15,7 +15,7 @@ let currentPackageData = null;
 
 async function fetchPackageForBooking(slug) {
   try {
-    const apiUrl = window.getApiUrl ? window.getApiUrl(`/api/packages/${slug}`) : `https://daffodil-himalayan-website.onrender.com/api/packages/${slug}`;
+    const apiUrl = window.getApiUrl ? window.getApiUrl(`/api/packages/${slug}`) : `/api/packages/${slug}`;
     const res = await fetch(apiUrl);
     if (!res.ok) {
       throw new Error(`Server returned HTTP ${res.status}`);
@@ -126,7 +126,7 @@ async function handleBookingSubmit(e) {
   };
 
   try {
-    const bookingApiUrl = window.getApiUrl ? window.getApiUrl('/api/bookings') : 'https://daffodil-himalayan-website.onrender.com/api/bookings';
+    const bookingApiUrl = window.getApiUrl ? window.getApiUrl('/api/bookings') : '/api/bookings';
     const res = await fetch(bookingApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

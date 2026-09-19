@@ -128,7 +128,7 @@
       try {
         const queryStr = window.location.search || '';
         const endpoint = `/api/packages${queryStr}`;
-        const apiUrl = window.getApiUrl ? window.getApiUrl(endpoint) : `https://daffodil-himalayan-website.onrender.com${endpoint}`;
+        const apiUrl = window.getApiUrl ? window.getApiUrl(endpoint) : endpoint;
         const res = await fetch(apiUrl);
         if (!res.ok) {
           throw new Error(`Server returned HTTP ${res.status}`);

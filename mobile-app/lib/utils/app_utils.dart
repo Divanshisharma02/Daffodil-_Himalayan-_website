@@ -1,5 +1,5 @@
 class AppUtils {
-  static const String cdnBaseUrl = 'https://daffodil-himalayan-website.onrender.com';
+  static const String cdnBaseUrl = 'http://localhost:5000';
 
   /// Resolves relative image paths (e.g. 'images/kashimr.jpg') to complete CDN URLs
   static String resolveImageUrl(String? path) {

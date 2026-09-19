@@ -107,7 +107,7 @@
       }
 
       try {
-        const apiUrl = window.getApiUrl ? window.getApiUrl('/api/hotels') : 'https://daffodil-himalayan-website.onrender.com/api/hotels';
+        const apiUrl = window.getApiUrl ? window.getApiUrl('/api/hotels') : '/api/hotels';
         const res = await fetch(apiUrl);
         if (!res.ok) {
           throw new Error(`Server returned HTTP ${res.status}`);

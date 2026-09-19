@@ -5,7 +5,7 @@ import '../models/destination_model.dart';
 import '../models/booking_model.dart';
 
 class ApiService {
-  static const String baseUrl = 'https://daffodil-himalayan-website.onrender.com';
+  static const String baseUrl = 'http://localhost:5000';
 
   // Fetch all tour packages
   static Future<List<TourPackage>> fetchPackages() async {

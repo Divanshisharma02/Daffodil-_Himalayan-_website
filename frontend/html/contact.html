@@ -136,7 +136,7 @@
       const msg = document.getElementById('contactMessage').value.trim();
 
       try {
-        const apiUrl = window.getApiUrl ? window.getApiUrl('/api/inquiries') : 'https://daffodil-himalayan-website.onrender.com/api/inquiries';
+        const apiUrl = window.getApiUrl ? window.getApiUrl('/api/inquiries') : '/api/inquiries';
         await fetch(apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

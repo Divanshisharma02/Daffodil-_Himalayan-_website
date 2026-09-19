@@ -128,7 +128,7 @@
       renderDestination(fallback);
 
       try {
-        const apiUrl = window.getApiUrl ? window.getApiUrl(`/api/destinations/${slug}`) : `https://daffodil-himalayan-website.onrender.com/api/destinations/${slug}`;
+        const apiUrl = window.getApiUrl ? window.getApiUrl(`/api/destinations/${slug}`) : `/api/destinations/${slug}`;
         const res = await fetch(apiUrl);
         if (!res.ok) {
           throw new Error(`Server returned HTTP ${res.status}`);

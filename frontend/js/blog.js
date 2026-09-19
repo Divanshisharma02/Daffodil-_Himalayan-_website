@@ -473,7 +473,7 @@ async function initCommunityGallery() {
 
       btn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i> Saving to Gallery...`;
 
-      const uploadUrl = window.getApiUrl ? window.getApiUrl('/api/gallery/upload') : 'https://daffodil-himalayan-website.onrender.com/api/gallery/upload';
+      const uploadUrl = window.getApiUrl ? window.getApiUrl('/api/gallery/upload') : '/api/gallery/upload';
       const res = await fetch(uploadUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -515,7 +515,7 @@ async function fetchGalleryPhotos() {
   if (!container) return;
 
   try {
-    const galleryUrl = window.getApiUrl ? window.getApiUrl('/api/gallery') : 'https://daffodil-himalayan-website.onrender.com/api/gallery';
+    const galleryUrl = window.getApiUrl ? window.getApiUrl('/api/gallery') : '/api/gallery';
     const res = await fetch(galleryUrl);
     if (!res.ok) {
       throw new Error(`Server returned HTTP ${res.status}`);
@@ -602,7 +602,7 @@ function renderGalleryGrid(photos) {
       if (!uploaderName || !text) return;
 
       try {
-        const commentUrl = window.getApiUrl ? window.getApiUrl(`/api/gallery/${photoId}/comments`) : `https://daffodil-himalayan-website.onrender.com/api/gallery/${photoId}/comments`;
+        const commentUrl = window.getApiUrl ? window.getApiUrl(`/api/gallery/${photoId}/comments`) : `/api/gallery/${photoId}/comments`;
         const res = await fetch(commentUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

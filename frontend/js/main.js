@@ -1,18 +1,10 @@
 // ==========================================================
-// CENTRALIZED API CONFIGURATION & CROSS-ORIGIN PROXY HANDLER
+// CENTRALIZED API CONFIGURATION
 // ==========================================================
-const BACKEND_RENDER_URL = 'https://daffodil-himalayan-website.onrender.com';
-
-const isLocalhost = Boolean(
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1' ||
-  window.location.hostname === '::1'
-);
-
-// If running on local server or backend domain directly, use relative paths. Otherwise route to live Render backend.
-window.API_BASE_URL = (isLocalhost || window.location.hostname.includes('daffodil-himalayan-website'))
-  ? ''
-  : BACKEND_RENDER_URL;
+// When running via local server (npm start), relative URLs are used.
+// If opened directly via file:// protocol, route to the local development server.
+const isFileProtocol = window.location.protocol === 'file:';
+window.API_BASE_URL = isFileProtocol ? 'http://localhost:5000' : '';
 
 window.getApiUrl = function(path) {
   if (!path || typeof path !== 'string') return path;
@@ -490,7 +482,7 @@ function setupGlobalModalFormHandlers() {
 
     // Log to backend Excel sheet
     try {
-      const apiUrl = window.getApiUrl ? window.getApiUrl('/api/inquiries') : 'https://daffodil-himalayan-website.onrender.com/api/inquiries';
+      const apiUrl = window.getApiUrl ? window.getApiUrl('/api/inquiries') : '/api/inquiries';
       await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
