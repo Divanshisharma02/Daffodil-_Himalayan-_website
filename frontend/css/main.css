@@ -441,6 +441,84 @@ h3, h4, h5, h6, .font-serif {
 }
 .footer-links a:hover { color: var(--color-accent); }
 
+/* ==========================================================================
+   HIGH-CONTRAST DARK THEME & FOOTER VISIBILITY RULES
+   Guarantees 100% crystal-clear contrast and text visibility across all pages
+   ========================================================================== */
+.bg-dark,
+[class*="bg-dark"],
+.luxury-footer,
+footer,
+.amenity-card-dark {
+  color: #FFFFFF;
+}
+
+.bg-dark h1, .bg-dark h2, .bg-dark h3, .bg-dark h4, .bg-dark h5, .bg-dark h6,
+footer h1, footer h2, footer h3, footer h4, footer h5, footer h6,
+.luxury-footer h1, .luxury-footer h2, .luxury-footer h3, .luxury-footer h4, .luxury-footer h5, .luxury-footer h6,
+.amenity-card-dark h6, .amenity-card-dark h5,
+.text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6 {
+  color: #FFFFFF !important;
+}
+
+.bg-dark h1.text-warning, .bg-dark h2.text-warning, .bg-dark h3.text-warning, .bg-dark h4.text-warning, .bg-dark h5.text-warning, .bg-dark h6.text-warning,
+footer h1.text-warning, footer h2.text-warning, footer h3.text-warning, footer h4.text-warning, footer h5.text-warning, footer h6.text-warning,
+.luxury-footer .footer-title,
+.footer-title {
+  color: #FFD700 !important;
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+
+.bg-dark p, footer p, .luxury-footer p,
+.bg-dark .text-light, footer .text-light, .luxury-footer .text-light,
+.bg-dark small, footer small, .luxury-footer small {
+  color: #F7F3E9 !important;
+  opacity: 1 !important;
+}
+
+.bg-dark a:not(.btn), footer a:not(.btn), .luxury-footer a:not(.btn),
+footer ul a, .luxury-footer ul a {
+  color: #F7F3E9 !important;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.bg-dark a:not(.btn):hover, footer a:not(.btn):hover, .luxury-footer a:not(.btn):hover,
+footer ul a:hover, .luxury-footer ul a:hover {
+  color: #FFD700 !important;
+  text-decoration: underline;
+}
+
+.amenity-card-dark {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 24px 16px;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  height: 100%;
+}
+
+.amenity-card-dark:hover {
+  transform: translateY(-4px);
+  border-color: #FFD700;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.amenity-card-dark h6 {
+  color: #FFFFFF !important;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.amenity-card-dark small,
+.amenity-card-dark p {
+  color: #E2D7BE !important;
+  font-size: 0.85rem;
+}
+
 @media (max-width: 1200px) {
   .hero-title { font-size: 2.8rem; }
   .luxury-search-pill { flex-direction: column; border-radius: var(--radius-md); }
